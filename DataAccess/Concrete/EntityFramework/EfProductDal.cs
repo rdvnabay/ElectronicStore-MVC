@@ -17,13 +17,13 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var result = from p in context.Products
                              join c in context.Categories
-                             on p.CategoryId equals c.CategoryId
+                             on p.CategoryId equals c.Id
                              select new ProductDetailDto
                              {
-                                 ProductId = p.ProductId,
-                                 ProductName = p.ProductName,
+                                 ProductId = p.Id,
+                                 ProductName = p.Name,
                                  UnitsInStock = p.UnitsInStock,
-                                 CategoryName = c.CategoryName
+                                 CategoryName = c.Name
                              };
                 return result.ToList();
             }

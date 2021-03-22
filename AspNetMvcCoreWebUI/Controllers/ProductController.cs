@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
+namespace AspNetMvcCoreWebUI.Controllers
 {
-    [Area("adminPanel")]
-    public class HomeController : Controller
+    public class ProductController : Controller
     {
         public IActionResult Index()
         {

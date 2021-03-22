@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Business.Abstract;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,17 @@ namespace AspNetMvcCoreWebUI.Controllers
 {
     public class HomeController : Controller
     {
+        #region Dependency Injection
+        private IProductService _productService;
+        public HomeController(IProductService productService)
+        {
+            _productService = productService;
+        }
+        #endregion
         public IActionResult Index()
         {
-            return View();
+            var model=_productService.GetAll();
+            return View(model.Data);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
-            var result = BusinessRules.Run(CheckIfProductNameAlreadyExist(product.ProductName),
+            var result = BusinessRules.Run(CheckIfProductNameAlreadyExist(product.Name),
                   CheckIfProductCountOfCategoryCorrect(product.CategoryId),
                   CheckIfCategoryLimitExceded());
             if (result != null)
@@ -51,7 +51,7 @@ namespace Business.Concrete
         #region Business Rules 
         private IResult CheckIfProductNameAlreadyExist(string productName)
         {
-            var result = _productDal.GetAll(p => p.ProductName == productName).Any();
+            var result = _productDal.GetAll(p => p.Name == productName).Any();
             if (result)
             {
                 return new ErrorResult(Messages.ProductNameAlreadyExist);
