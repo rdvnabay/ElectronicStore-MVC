@@ -17,6 +17,7 @@ namespace Business.Concrete
 {
     public class ProductManager : IProductService
     {
+        #region Dependency Injection
         IProductDal _productDal;
         ICategoryService _categoryService;
         public ProductManager(IProductDal productDal,
@@ -25,6 +26,10 @@ namespace Business.Concrete
             _productDal = productDal;
             _categoryService = categoryService;
         }
+        #endregion
+
+
+        //Methods
         #region Add
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
@@ -41,12 +46,21 @@ namespace Business.Concrete
         }
         #endregion
 
+        #region GetAll
         public IDataResult<List<Product>> GetAll()
         {
             return new SuccessDataResult<List<Product>>(_productDal.GetAll());
 
         }
-       
+        #endregion
+
+        #region Get
+        public IDataResult<Product> Get(int id)
+        {
+            return new SuccessDataResult<Product>(_productDal.Get(p => p.Id == id));
+        }
+        #endregion
+
         //Business Rules Methods
         #region Business Rules 
         private IResult CheckIfProductNameAlreadyExist(string productName)

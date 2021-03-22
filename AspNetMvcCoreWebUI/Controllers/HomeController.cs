@@ -16,10 +16,13 @@ namespace AspNetMvcCoreWebUI.Controllers
             _productService = productService;
         }
         #endregion
+
+        #region Index
         public IActionResult Index()
         {
             var model=_productService.GetAll();
             return View(model.Data);
         }
+        #endregion
     }
 }

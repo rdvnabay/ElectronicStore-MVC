@@ -1,0 +1,39 @@
+﻿@model Category
+
+<link rel="stylesheet" href="~/panel/js/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="~/panel/js/plugins/dropzone/dist/min/dropzone.min.css">
+<!-- Info -->
+<form method="POST" asp-controller="Category" asp-action="Add">
+    <div class="block block-rounded">
+        <div class="block-header block-header-default">
+            <h3 class="block-title">Info</h3>
+        </div>
+        <div class="block-content">
+            <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-8">
+
+                    <div class="form-group">
+                        <label asp-for="Name">Kategori Adı</label>
+                        <input asp-for="Name" class="form-control">
+                    </div>
+                   
+                    <div class="form-group">
+                        <label>Yayında mı?</label>
+                        <div class="custom-control custom-switch mb-1">
+                            <input type="checkbox" class="custom-control-input" id="one-ecom-product-published" name="one-ecom-product-published" checked>
+                            <label class="custom-control-label" for="one-ecom-product-published"></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-alt-success">Kategori Ekle</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Info -->
+ 
+</form>
+<!-- Page JS Plugins -->
+<script src="~/panel/js/plugins/select2/js/select2.full.min.js"></script>
+<script src="~/panel/js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
