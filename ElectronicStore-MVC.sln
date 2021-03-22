@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{4C5E3555-5430-462B-8469-BC5E2F5E51E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{4C5E3555-5430-462B-8469-BC5E2F5E51E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{CBC40EEC-11AF-4BF3-A024-0530F1CE2BF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{CBC40EEC-11AF-4BF3-A024-0530F1CE2BF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{A354CAEB-4965-4360-B3DD-4110144514E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{A354CAEB-4965-4360-B3DD-4110144514E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{E9E22E57-B3D6-40B0-8812-0FFA2042DEC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Business.csproj", "{E9E22E57-B3D6-40B0-8812-0FFA2042DEC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetMvcCoreWebUI", "AspNetMvcCoreWebUI\AspNetMvcCoreWebUI.csproj", "{ECE6B203-8A4A-4FE9-8E81-581C19E00926}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetMvcCoreWebUI", "AspNetMvcCoreWebUI\AspNetMvcCoreWebUI.csproj", "{ECE6B203-8A4A-4FE9-8E81-581C19E00926}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{8DAC240D-38BF-4832-BEB1-16179DF62E5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{8DAC240D-38BF-4832-BEB1-16179DF62E5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
