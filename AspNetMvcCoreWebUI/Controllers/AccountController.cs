@@ -1,4 +1,5 @@
-﻿using Entities.DTOs;
+﻿using Business.Abstract;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,13 @@ namespace AspNetMvcCoreWebUI.Controllers
 {
     public class AccountController : Controller
     {
+        #region Dependency Injection
+        private IAuthService _authService;
+        public AccountController(IAuthService authService)
+        {
+            _authService = authService;
+        }
+        #endregion
         #region Login
         public IActionResult Login()
         {
@@ -18,10 +26,23 @@ namespace AspNetMvcCoreWebUI.Controllers
         [HttpPost]
         public IActionResult Login(UserForLoginDto userForLoginDto)
         {
-            return View();
+            var userToLogin = _authService.Login(userForLoginDto);
+            if (!userToLogin.Success)
+            {
+                return BadRequest(userToLogin.Message);
+            }
+
+            var result = _authService.CreateAccessToken(userToLogin.Data);
+            if (result.Success)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            TempData["message"] = result.Message;
+            return View(userForLoginDto);
         }
         #endregion
 
+        #region Register
         public IActionResult Register()
         {
             return View();
@@ -30,7 +51,22 @@ namespace AspNetMvcCoreWebUI.Controllers
         [HttpPost]
         public IActionResult Register(UserForRegisterDto userForRegisterDto)
         {
-            return View();
+            var userExists = _authService.UserExists(userForRegisterDto.Email);
+            if (!userExists.Success)
+            {
+                return BadRequest(userExists.Message);
+            }
+
+            var registerResult = _authService.Register(userForRegisterDto, userForRegisterDto.Password);
+            var result = _authService.CreateAccessToken(registerResult.Data);
+            if (result.Success)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            return BadRequest(result.Message);
         }
+        #endregion
     }
 }
+

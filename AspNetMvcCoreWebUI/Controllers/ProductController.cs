@@ -9,20 +9,29 @@ namespace AspNetMvcCoreWebUI.Controllers
 {
     public class ProductController : Controller
     {
+        #region Dependency Injection
         private IProductService _productService;
         public ProductController(IProductService productService)
         {
             _productService = productService;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
+        #endregion
 
+        //Methods
+        #region Index
+        public IActionResult Index()
+        {  
+            return View(_productService.GetAll());
+        }
+        #endregion
+
+
+        #region Detail
         public IActionResult Detail(int id)
         {
             var model = _productService.Get(id);
             return View(model.Data);
         }
+        #endregion
     }
 }

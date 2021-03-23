@@ -18,11 +18,16 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
             _categoryService = categoryService;
         }
         #endregion
+
+        #region Index
         public IActionResult Index()
         {
-            return View();
+            var model=_categoryService.GetAll();
+            return View(model.Data);
         }
+        #endregion
 
+        #region Add
         public IActionResult Add()
         {
             return View();
@@ -32,12 +37,37 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
         public IActionResult Add(Category category)
         {
             _categoryService.Add(category);
-            return View();
+            return RedirectToAction("Index","Category");
         }
+        #endregion
 
+        #region Detail
         public IActionResult Detail()
         {
             return View();
         }
+
+        #endregion
+
+        #region Edit
+        public IActionResult Edit()
+        {
+            return View();
+        }
+        #endregion
+
+        #region Remove
+        [HttpPost]
+        public IActionResult Remove(int categoryId)
+        {
+            var model=_categoryService.GetById(categoryId);
+            if (model==null)
+            {
+                return View();
+            }
+            _categoryService.Delete(model.Data);
+            return RedirectToAction("Index","Category");
+        }
+        #endregion  
     }
 }

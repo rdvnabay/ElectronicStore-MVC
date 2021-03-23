@@ -46,6 +46,14 @@ namespace Business.Concrete
         }
         #endregion
 
+        #region Edit
+        public IResult Update(Product product)
+        {
+            _productDal.Update(product);
+            return new SuccessResult();
+        }
+        #endregion
+
         #region GetAll
         public IDataResult<List<Product>> GetAll()
         {
@@ -58,6 +66,14 @@ namespace Business.Concrete
         public IDataResult<Product> Get(int id)
         {
             return new SuccessDataResult<Product>(_productDal.Get(p => p.Id == id));
+        }
+        #endregion
+
+        #region Delete 
+        public IResult Delete(Product product)
+        {
+            _productDal.Delete(product);
+            return new SuccessResult();
         }
         #endregion
 
