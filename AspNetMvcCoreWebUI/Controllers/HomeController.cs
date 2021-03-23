@@ -18,10 +18,16 @@ namespace AspNetMvcCoreWebUI.Controllers
         #endregion
 
         #region Index
-        public IActionResult Index()
+        public IActionResult Index(string searchString)
         {
-            var model=_productService.GetAll();
-            return View(model.Data);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var model=_productService.GetSearchResult(searchString);
+                return View(model.Data);
+            }
+
+            return View(_productService.GetAll().Data);
         }
         #endregion
     }

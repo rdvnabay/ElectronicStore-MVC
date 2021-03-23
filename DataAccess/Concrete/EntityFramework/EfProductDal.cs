@@ -11,6 +11,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfProductDal : EfEntityRepositoryBase<Product, ElectronicShopDbContext>, IProductDal
     {
+        #region GetProductDetails
         public List<ProductDetailDto> GetProductDetails()
         {
             using (ElectronicShopDbContext context = new ElectronicShopDbContext())
@@ -28,5 +29,6 @@ namespace DataAccess.Concrete.EntityFramework
                 return result.ToList();
             }
         }
+        #endregion
     }
 }

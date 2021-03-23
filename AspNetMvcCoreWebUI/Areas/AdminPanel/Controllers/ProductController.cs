@@ -17,10 +17,14 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
     {
         #region Dependency Injection
         IProductService _productService;
+        ICategoryService _categoryService;
 
-        public ProductController(IProductService productService)
+        public ProductController(
+            IProductService productService,
+            ICategoryService categoryService)
         {
             _productService = productService;
+            _categoryService = categoryService;
         }
         #endregion
 
@@ -36,7 +40,11 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
         #region Add
         public IActionResult Add()
         {
-            return View();
+            var model = new ProductCategoryListModel
+            {
+                Categories = _categoryService.GetAll().Data
+        };
+            return View(model);
         }
 
         [HttpPost]

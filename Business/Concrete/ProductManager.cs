@@ -54,6 +54,13 @@ namespace Business.Concrete
         }
         #endregion
 
+        #region Get
+        public IDataResult<Product> Get(int id)
+        {
+            return new SuccessDataResult<Product>(_productDal.Get(p => p.Id == id));
+        }
+        #endregion
+
         #region GetAll
         public IDataResult<List<Product>> GetAll()
         {
@@ -61,11 +68,16 @@ namespace Business.Concrete
 
         }
         #endregion
-
-        #region Get
-        public IDataResult<Product> Get(int id)
+ 
+        #region GetSearchResult
+        public IDataResult<List<Product>> GetSearchResult(string searchString)
         {
-            return new SuccessDataResult<Product>(_productDal.Get(p => p.Id == id));
+            var data=_productDal.GetAll(p=>p.Name.Contains(searchString));
+            if (data==null)
+            {
+                return new ErrorDataResult<List<Product>>(Messages.NotFoundProduct);
+            }
+            return new SuccessDataResult<List<Product>>(data);
         }
         #endregion
 

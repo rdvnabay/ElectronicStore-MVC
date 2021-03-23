@@ -1,4 +1,4 @@
-﻿@model Product
+﻿@model ProductCategoryListModel
 
 <link rel="stylesheet" href="~/panel/js/plugins/select2/css/select2.min.css">
 <link rel="stylesheet" href="~/panel/js/plugins/dropzone/dist/min/dropzone.min.css">
@@ -17,38 +17,40 @@
                         <input type="text" class="form-control" id="one-ecom-product-id" name="one-ecom-product-id" value="789" readonly>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Name">Ürün Adı</label>
-                        <input asp-for="Name" class="form-control">
+                        <label asp-for="Product.Name">Ürün Adı</label>
+                        <input asp-for="Product.Name" class="form-control">
                     </div>
                     <div class="form-group">
                         <!-- CKEditor (js-ckeditor-inline + js-ckeditor ids are initialized in Helpers.ckeditor()) -->
                         <!-- For more info and examples you can check out http://ckeditor.com -->
-                        <label asp-for="Description">Açıklama</label>
-                        <textarea id="js-ckeditor" asp-for="Description"></textarea>
+                        <label asp-for="Product.Description">Açıklama</label>
+                        <textarea id="js-ckeditor" asp-for="Product.Description"></textarea>
                     </div>
                     <div class="form-group">
-                        <label asp-for="ShortDescription">Özet Bilgi</label>
-                        <textarea class="form-control" asp-for="ShortDescription" rows="4"></textarea>
+                        <label asp-for="Product.ShortDescription">Özet Bilgi</label>
+                        <textarea class="form-control" asp-for="Product.ShortDescription" rows="4"></textarea>
                     </div>
                     <div class="form-group">
-                        <!-- Select2 (.js-select2 class is initialized in Helpers.select2()) -->
-                        <!-- For more info and examples you can check out https://github.com/select2/select2 -->
+                        @*@await Component.InvokeAsync("CategoryList")*@
                         <label for="one-ecom-product-category">Kategori</label>
-                        <select class="js-select2 form-control" asp-for="CategoryId" style="width: 100%;" data-placeholder="Choose one..">
+                        <select class="js-select2 form-control" asp-for="Product.CategoryId" style="width: 100%;" data-placeholder="Choose one..">
                             <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
-                            <option value="1">Cables</option>
+                            @foreach (var category in Model.Categories)
+                            {
+                                <option value="@category.Id">@category.Name</option>
+                            }
                         </select>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <label asp-for="UnitPrice">Fiyat (₺)</label>
-                            <input asp-for="UnitPrice" class="form-control">
+                            <label asp-for="Product.UnitPrice">Fiyat (₺)</label>
+                            <input asp-for="Product.UnitPrice" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <label asp-for="UnitsInStock">Stok</label>
-                            <input asp-for="UnitsInStock" class="form-control">
+                            <label asp-for="Product.UnitsInStock">Stok</label>
+                            <input asp-for="Product.UnitsInStock" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
