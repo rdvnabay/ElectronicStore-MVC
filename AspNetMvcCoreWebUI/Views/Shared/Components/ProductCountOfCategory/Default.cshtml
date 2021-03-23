@@ -1,0 +1,29 @@
+﻿@model List<ProducCountOfCategoryDto>
+ <!-- aside Widget -->
+<div class="aside">
+    <h3 class="aside-title">Categories</h3>
+    <div class="checkbox-filter">
+            <span>
+                <a asp-controller="Product" asp-action="Index">
+                    Tüm Ürünler 
+                </a>
+            </span>
+            @foreach (var category in Model)
+            {
+                <div class="input-checkbox">
+                    @*<input type="checkbox" id="category-1" >*@
+                    <label asp-for="@category.CategoryId">
+                        <span>
+                            <a asp-controller="Product" asp-action="Index" asp-route-categoryId="@category.CategoryId">
+                                @category.CategoryName
+                            </a>
+                        </span>
+
+                        <small>(@category.ProductCount)</small>
+                    </label>
+                </div>
+            }
+
+    </div>
+</div>
+<!-- /aside Widget -->

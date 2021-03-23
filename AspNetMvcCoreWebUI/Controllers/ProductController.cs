@@ -20,8 +20,16 @@ namespace AspNetMvcCoreWebUI.Controllers
         //Methods
         #region Index
         public IActionResult Index()
-        {  
-            return View(_productService.GetAll());
+        {
+            var model = _productService.GetAll();
+            return View(model.Data);
+        }
+
+        [Route("products/{categoryId?}")]
+        public IActionResult Index(int categoryId)
+        {
+           var model= _productService.GetProductsOfByCategoryId(categoryId);
+            return View(model.Data);
         }
         #endregion
 

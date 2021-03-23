@@ -3,6 +3,7 @@ using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -47,7 +48,7 @@ namespace Business.Concrete
         public IDataResult<Category> GetById(int categoryId)
         {
             return new SuccessDataResult<Category>(_categoryDal.Get(c => c.Id == categoryId));
-        }
+        }  
         #endregion
 
         #region Update
@@ -55,6 +56,13 @@ namespace Business.Concrete
         {
             _categoryDal.Update(category);
             return new SuccessResult();
+        }
+        #endregion
+
+        #region ProductCountOfCategory
+        public IDataResult<List<ProducCountOfCategoryDto>> ProductCountOfCategory()
+        {
+            return new SuccessDataResult<List<ProducCountOfCategoryDto>>(_categoryDal.ProductCountOfCategory());
         }
         #endregion
     }

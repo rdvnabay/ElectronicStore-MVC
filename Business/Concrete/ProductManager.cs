@@ -89,6 +89,18 @@ namespace Business.Concrete
         }
         #endregion
 
+        #region GetProductsOfByCategoryId
+        public IDataResult<List<Product>> GetProductsOfByCategoryId(int categoryId)
+        {
+            var data=_productDal.GetAll(p => p.CategoryId == categoryId);
+            if (data!=null)
+            {
+                return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == categoryId));
+            }
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll());
+        }
+        #endregion
+
         //Business Rules Methods
         #region Business Rules 
         private IResult CheckIfProductNameAlreadyExist(string productName)
