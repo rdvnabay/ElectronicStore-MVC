@@ -55,7 +55,7 @@ namespace Business.Concrete
         #endregion
 
         #region Get
-        public IDataResult<Product> Get(int id)
+        public IDataResult<Product> GetById(int id)
         {
             return new SuccessDataResult<Product>(_productDal.Get(p => p.Id == id));
         }

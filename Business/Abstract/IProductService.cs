@@ -9,7 +9,7 @@ namespace Business.Abstract
 {
     public interface IProductService
     {
-        IDataResult<Product> Get(int id);
+        IDataResult<Product> GetById(int id);
         IDataResult<List<Product>> GetAll();
   
 

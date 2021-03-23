@@ -87,7 +87,7 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
         #region Edit
         public IActionResult Edit(int id)
         {
-            var model = _productService.Get(id);
+            var model = _productService.GetById(id);
             return View(model.Data);
         }
 
@@ -126,7 +126,7 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
         [HttpPost]
         public IActionResult Delete(int productId)
         {
-            var model = _productService.Get(productId);
+            var model = _productService.GetById(productId);
             if (model != null)
             {
                 _productService.Delete(model.Data);

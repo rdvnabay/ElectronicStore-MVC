@@ -29,7 +29,7 @@ namespace AspNetMvcCoreWebUI.Controllers
         #region Detail
         public IActionResult Detail(int id)
         {
-            var model = _productService.Get(id);
+            var model = _productService.GetById(id);
             return View(model.Data);
         }
         #endregion
