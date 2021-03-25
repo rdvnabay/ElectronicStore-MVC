@@ -1,4 +1,5 @@
-﻿using Business.Abstract;
+﻿using AspNetMvcCoreWebUI.Models.Paging;
+using Business.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,17 +20,24 @@ namespace AspNetMvcCoreWebUI.Controllers
 
         //Methods
         #region Index
-        public IActionResult Index()
+        //[Route("products/{categoryId?}")]
+        public IActionResult Index(int categoryId,int page=1)
         {
-            var model = _productService.GetAll();
-            return View(model.Data);
-        }
+            const int pageSize = 3;
 
-        [Route("products/{categoryId?}")]
-        public IActionResult Index(int categoryId)
-        {
-           var model= _productService.GetProductsOfByCategoryId(categoryId);
-            return View(model.Data);
+            return View(new ProductListViewModel()
+            {
+                Products = _productService.GetProductsOfByCategoryId(categoryId,page,pageSize).Data,
+                PagingInfo = new PagingInfo
+                {
+                    CurrentCategoryId = categoryId,
+                    CurrentPage = page,
+                    ItemsPerPage = pageSize,
+                    TotalItems = _productService.GetAll().Data.Count
+                }
+            });
+            //var model= _productService.GetProductsOfByCategoryId(categoryId);
+            //return View(model.Data);
         }
         #endregion
 

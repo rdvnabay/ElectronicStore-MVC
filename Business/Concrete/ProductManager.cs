@@ -90,12 +90,12 @@ namespace Business.Concrete
         #endregion
 
         #region GetProductsOfByCategoryId
-        public IDataResult<List<Product>> GetProductsOfByCategoryId(int categoryId)
+        public IDataResult<List<Product>> GetProductsOfByCategoryId(int categoryId,int page, int pageSize)
         {
             var data=_productDal.GetAll(p => p.CategoryId == categoryId);
             if (data!=null)
             {
-                return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == categoryId));
+                return new SuccessDataResult<List<Product>>(_productDal.GetProductsOfByCategoryId(categoryId,page,pageSize));
             }
             return new SuccessDataResult<List<Product>>(_productDal.GetAll());
         }

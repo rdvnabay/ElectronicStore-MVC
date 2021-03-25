@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Entities.Concrete
+namespace Entities.Concrete
 {
-    public class OperationClaim : IEntity
+    public class Image:IEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
-        public List<User> Users { get; set; }
+        public int ProductId { get; set; }
     }
 }

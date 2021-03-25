@@ -30,5 +30,19 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
         #endregion
+
+        public List<Product> GetProductsOfByCategoryId(int categoryId, int page, int pageSize)
+        {
+            using (var context = new ElectronicShopDbContext())
+            {
+                var products = context.Products.AsQueryable();
+                if (categoryId > 0)
+                {
+                    products = products.Where(p => p.CategoryId == categoryId);
+                    return products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                }
+                return products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            }
+        }
     }
 }

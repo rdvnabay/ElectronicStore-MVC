@@ -61,7 +61,7 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
 
             var extention = Path.GetExtension(file.FileName);
             var randomName = string.Format($"{DateTime.Now.Ticks}{extention}");
-            product.Image = randomName;
+            //product.Image = randomName;
             var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\panel\\img", randomName);
 
             using (var stream = new FileStream(path, FileMode.Create))
@@ -102,7 +102,7 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
             {
                 var extention = Path.GetExtension(file.FileName);
                 var randomName = string.Format($"{DateTime.Now.Ticks}{extention}");
-                product.Image = randomName;
+                //product.Image = randomName;
                 var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\panel\\img", randomName);
 
                 using (var stream = new FileStream(path, FileMode.Create))

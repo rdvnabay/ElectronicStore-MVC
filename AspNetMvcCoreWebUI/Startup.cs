@@ -39,6 +39,11 @@ namespace AspNetMvcCoreWebUI
 
             app.UseEndpoints(endpoints =>
             {
+                //endpoints.MapControllerRoute(
+                //  name: "products",
+                //  pattern: "products/{action=Index}/{id?}");
+                  
+
                 endpoints.MapControllerRoute(
                    name: "adminPanel",
                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
