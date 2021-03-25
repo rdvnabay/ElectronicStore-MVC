@@ -11,5 +11,6 @@ namespace DataAccess.Abstract
     {
         List<ProductDetailDto> GetProductDetails();
         List<Product> GetProductsOfByCategoryId(int categoryId, int page, int pageSize);
+
     }
 }

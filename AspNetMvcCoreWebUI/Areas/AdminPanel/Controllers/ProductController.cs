@@ -1,6 +1,7 @@
 ﻿using AspNetMvcCoreWebUI.Areas.AdminPanel.Models;
 using Business.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -18,13 +19,16 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
         #region Dependency Injection
         IProductService _productService;
         ICategoryService _categoryService;
+        IImageService _imageService;
 
         public ProductController(
             IProductService productService,
-            ICategoryService categoryService)
+            ICategoryService categoryService,
+            IImageService imageService)
         {
             _productService = productService;
             _categoryService = categoryService;
+            _imageService = imageService;
         }
         #endregion
 
@@ -40,46 +44,44 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
         #region Add
         public IActionResult Add()
         {
-            var model = new ProductCategoryListModel
-            {
-                Categories = _categoryService.GetAll().Data
-        };
-            return View(model);
+            return View(new Product());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(Product product, IFormFile file)
+        public async Task<IActionResult> Add(Product product, List<IFormFile> files)
         {
             if (product == null)
             {
                 return View(product);
             }
-            if (file == null)
+            if (files == null)
             {
                 return View(product);
             }
+            _productService.Add(product);
+            int productId = product.Id;
 
-            var extention = Path.GetExtension(file.FileName);
-            var randomName = string.Format($"{DateTime.Now.Ticks}{extention}");
-            //product.Image = randomName;
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\panel\\img", randomName);
-
-            using (var stream = new FileStream(path, FileMode.Create))
+            foreach (var file in files)
             {
-                await file.CopyToAsync(stream);
+                var extention = Path.GetExtension(file.FileName);
+                var fileName = string.Format($"{DateTime.Now.Ticks}{extention}");
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\panel\\img", fileName);
+                var images = new List<Image>
+                {
+                  new Image{Name=fileName, ProductId=productId}
+                };
+                foreach (var image in images)
+                {
+                    _imageService.Add(image);
+                }
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
             }
 
-            _productService.Add(product);
-            //TODO: Alert Message
-            /*
-            var msg = new AlertMessage()
-            {
-                Message = $"{product.Name} isimli ürün eklendi.",
-                AlertType = "danger"
-            };
-
-            TempData["message"] = JsonConvert.SerializeObject(msg);
-            */
             return RedirectToAction("Index", "Product");
         }
         #endregion

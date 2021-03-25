@@ -8,7 +8,7 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Models
 {
     public class ProductCategoryListModel
     {
-        public Product Product { get; set; }
+        public int CategoryId { get; set; }
         public List<Category> Categories { get; set; }
     }
 }

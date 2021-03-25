@@ -26,6 +26,9 @@ namespace Business.DependencyResolvers
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<EfUserDal>().As<IUserDal>();
 
+            builder.RegisterType<ImageManager>().As<IImageService>();
+            builder.RegisterType<EfImageDal>().As<IImageDal>();
+
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
 

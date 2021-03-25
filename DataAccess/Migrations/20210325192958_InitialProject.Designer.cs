@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ElectronicShopDbContext))]
-    [Migration("20210325150906_InitialProject")]
+    [Migration("20210325192958_InitialProject")]
     partial class InitialProject
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

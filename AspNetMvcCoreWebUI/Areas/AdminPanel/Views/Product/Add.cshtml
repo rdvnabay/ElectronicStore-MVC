@@ -1,9 +1,10 @@
-﻿@model ProductCategoryListModel
+﻿@model Product
 
 <link rel="stylesheet" href="~/panel/js/plugins/select2/css/select2.min.css">
 <link rel="stylesheet" href="~/panel/js/plugins/dropzone/dist/min/dropzone.min.css">
 <!-- Info -->
 <form method="POST" asp-controller="Product" asp-action="Add" enctype="multipart/form-data" class="dropzone dz-clickable">
+    @*<input type="hidden" asp-for="ProductId" value="@Model.ProductId"/>*@
     <div class="block block-rounded">
         <div class="block-header block-header-default">
             <h3 class="block-title">Info</h3>
@@ -17,40 +18,30 @@
                         <input type="text" class="form-control" id="one-ecom-product-id" name="one-ecom-product-id" value="789" readonly>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Product.Name">Ürün Adı</label>
-                        <input asp-for="Product.Name" class="form-control">
+                        <label asp-for="Name">Ürün Adı</label>
+                        <input asp-for="Name" class="form-control">
                     </div>
                     <div class="form-group">
                         <!-- CKEditor (js-ckeditor-inline + js-ckeditor ids are initialized in Helpers.ckeditor()) -->
                         <!-- For more info and examples you can check out http://ckeditor.com -->
-                        <label asp-for="Product.Description">Açıklama</label>
-                        <textarea id="js-ckeditor" asp-for="Product.Description"></textarea>
+                        <label asp-for="Description">Açıklama</label>
+                        <textarea id="js-ckeditor" asp-for="Description"></textarea>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Product.ShortDescription">Özet Bilgi</label>
-                        <textarea class="form-control" asp-for="Product.ShortDescription" rows="4"></textarea>
+                        <label asp-for="ShortDescription">Özet Bilgi</label>
+                        <textarea class="form-control" asp-for="ShortDescription" rows="4"></textarea>
                     </div>
-                    <div class="form-group">
-                        @*@await Component.InvokeAsync("CategoryList")*@
-                        <label for="one-ecom-product-category">Kategori</label>
-                        <select class="js-select2 form-control" asp-for="Product.CategoryId" style="width: 100%;" data-placeholder="Choose one..">
-                            <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
-                            @foreach (var category in Model.Categories)
-                            {
-                                <option value="@category.Id">@category.Name</option>
-                            }
-                        </select>
-                    </div>
+                    @await Component.InvokeAsync(typeof(AspNetMvcCoreWebUI.Areas.AdminPanel.ViewComponents.CategoryList),new {categoryId=Model.CategoryId})
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <label asp-for="Product.UnitPrice">Fiyat (₺)</label>
-                            <input asp-for="Product.UnitPrice" class="form-control">
+                            <label asp-for="UnitPrice">Fiyat (₺)</label>
+                            <input asp-for="UnitPrice" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <label asp-for="Product.UnitsInStock">Stok</label>
-                            <input asp-for="Product.UnitsInStock" class="form-control">
+                            <label asp-for="UnitsInStock">Stok</label>
+                            <input asp-for="UnitsInStock" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
@@ -87,7 +78,7 @@
         <div class="block-content block-content-full">
             <div class="row justify-content-center">
                 <div class="col-md-10 col-lg-8">
-                    <input type="file" name="file" />
+                    <input type="file" name="files" multiple />
                     <!-- Dropzone (functionality is auto initialized by the plugin itself in js/plugins/dropzone/dropzone.min.js) -->
                     <!-- For more info and examples you can check out http://www.dropzonejs.com/#usage -->
                     @*<form class="dropzone" action="be_pages_ecom_product_edit.html"></form>*@

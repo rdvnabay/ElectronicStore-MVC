@@ -11,6 +11,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfProductDal : EfEntityRepositoryBase<Product, ElectronicShopDbContext>, IProductDal
     {
+      
         #region GetProductDetails
         public List<ProductDetailDto> GetProductDetails()
         {
@@ -31,6 +32,7 @@ namespace DataAccess.Concrete.EntityFramework
         }
         #endregion
 
+        #region GetProductsOfByCategoryId
         public List<Product> GetProductsOfByCategoryId(int categoryId, int page, int pageSize)
         {
             using (var context = new ElectronicShopDbContext())
@@ -44,5 +46,7 @@ namespace DataAccess.Concrete.EntityFramework
                 return products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
             }
         }
+        #endregion
+
     }
 }

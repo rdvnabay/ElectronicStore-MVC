@@ -1,0 +1,12 @@
+﻿@model ProductCategoryListModel
+<div class="form-group">
+
+    <label for="one-ecom-product-category">Kategori</label>
+    <select class="js-select2 form-control" asp-for="@Model.CategoryId" style="width: 100%;" data-placeholder="Choose one..">
+        <option></option>
+        @foreach (var category in Model.Categories)
+        {
+            <option value="@category.Id">@category.Name</option>
+        }
+    </select>
+</div>
