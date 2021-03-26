@@ -50,6 +50,7 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(Product product, List<IFormFile> files)
         {
+
             if (product == null)
             {
                 return View(product);
