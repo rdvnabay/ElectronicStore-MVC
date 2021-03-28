@@ -11,19 +11,24 @@ namespace AspNetMvcCoreWebUI.Controllers
     {
         #region Dependency Injection
         private IProductService _productService;
-        public HomeController(IProductService productService)
+        private IAuthService _authService;
+        public HomeController(
+            IProductService productService,
+            IAuthService authService)
+
         {
             _productService = productService;
+            _authService = authService;
         }
         #endregion
 
         #region Index
         public IActionResult Index(string searchString)
         {
-
+            
             if (!String.IsNullOrEmpty(searchString))
             {
-                var model=_productService.GetSearchResult(searchString);
+                var model = _productService.GetSearchResult(searchString);
                 return View(model.Data);
             }
 

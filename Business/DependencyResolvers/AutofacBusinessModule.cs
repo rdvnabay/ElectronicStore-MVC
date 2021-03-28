@@ -17,19 +17,23 @@ namespace Business.DependencyResolvers
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<EfProductDal>().As<IProductDal>().SingleInstance();
-            builder.RegisterType<ProductManager>().As<IProductService>().SingleInstance();
-
             builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
             builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
-
-            builder.RegisterType<UserManager>().As<IUserService>();
-            builder.RegisterType<EfUserDal>().As<IUserDal>();
 
             builder.RegisterType<ImageManager>().As<IImageService>();
             builder.RegisterType<EfImageDal>().As<IImageDal>();
 
+            builder.RegisterType<OrderManager>().As<IOrderService>();
+            builder.RegisterType<EfOrderDal>().As<IOrderDal>();
+
+            builder.RegisterType<EfProductDal>().As<IProductDal>().SingleInstance();
+            builder.RegisterType<ProductManager>().As<IProductService>().SingleInstance();
+
+            builder.RegisterType<UserManager>().As<IUserService>();
+            builder.RegisterType<EfUserDal>().As<IUserDal>();
+
             builder.RegisterType<AuthManager>().As<IAuthService>();
+
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
 
             builder.RegisterType<CartManager>().As<ICartService>().SingleInstance();

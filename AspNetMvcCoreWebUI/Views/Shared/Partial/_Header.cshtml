@@ -1,4 +1,4 @@
-﻿  <!-- TOP HEADER -->
+﻿<!-- TOP HEADER -->
 <div id="top-header">
     <div class="container">
         <ul class="header-links pull-left">
@@ -7,8 +7,15 @@
             <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
         </ul>
         <ul class="header-links pull-right">
-            <li><a asp-controller="Account" asp-action="Login"><i class="fa fa-user-o"></i> Giriş Yap</a></li>
-            <li><a asp-controller="Account" asp-action="Register"><i class="fa fa-user-o"></i> Kayıt Ol</a></li>
+            @if (Context.Session.GetString("userName") == null)
+            {
+                <li><a asp-controller="Account" asp-action="Login"><i class="fa fa-user-o"></i> Giriş Yap</a></li>
+                <li><a asp-controller="Account" asp-action="Register"><i class="fa fa-user-o"></i> Kayıt Ol</a></li>
+            }
+            else
+            {
+                <li><a asp-controller="Account" asp-action="Login"><i class="fa fa-user-o"></i> Çıkış Yap</a></li>
+            }
         </ul>
     </div>
 </div>

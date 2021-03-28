@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.DTOs;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,7 @@ namespace AspNetMvcCoreWebUI.Controllers
             var result = _authService.CreateAccessToken(userToLogin.Data);
             if (result.Success)
             {
+                HttpContext.Session.SetString("userName", userForLoginDto.Email);
                 return RedirectToAction("Index", "Home");
             }
             TempData["message"] = result.Message;

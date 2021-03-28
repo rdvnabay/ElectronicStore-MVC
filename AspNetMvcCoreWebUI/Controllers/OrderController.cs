@@ -1,5 +1,7 @@
 ﻿using AspNetMvcCoreWebUI.Models;
 using AspNetMvcCoreWebUI.Services;
+using Business.Abstract;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,10 +13,14 @@ namespace AspNetMvcCoreWebUI.Controllers
     public class OrderController : Controller
     {
         #region Dependency Injection
+        private IOrderService _orderService;
         private ICartSessionService _cartSessionService;
-        public OrderController(ICartSessionService cartSessionService)
+        public OrderController(
+            ICartSessionService cartSessionService,
+            IOrderService orderService)
         {
             _cartSessionService = cartSessionService;
+            _orderService = orderService;
         }
         #endregion
         public IActionResult Index()
@@ -32,9 +38,20 @@ namespace AspNetMvcCoreWebUI.Controllers
         }
 
         [HttpPost] 
-        public IActionResult Checkout(string model)
+        public IActionResult Checkout(OrderViewModel orderViewModel)
         {
-            return View();
+            var order = new Order
+            {
+                FirstName = orderViewModel.FirstName,
+                LastName = orderViewModel.LastName,
+                Email=orderViewModel.Email,
+                Phone=orderViewModel.Phone,
+                Town=orderViewModel.Town,
+                City=orderViewModel.City,
+                Address=orderViewModel.Address
+            };
+            _orderService.Add(order);
+            return RedirectToAction("Index","Home");
         }
     }
 }

@@ -17,12 +17,33 @@ namespace AspNetMvcCoreWebUI
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc()
+                .AddSessionStateTempDataProvider();
             #region Session Settings
             services.AddSingleton<ICartSessionService, CartSessionService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSession();
             services.AddDistributedMemoryCache();
+            #endregion
+
+            #region Cookie Settings
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+                options.AccessDeniedPath = "/Account/AccessDenied"; 
+                options.SlidingExpiration = true; 
+                options.ExpireTimeSpan = TimeSpan.FromDays(1);
+
+                options.Cookie = new CookieBuilder()
+                {
+                    HttpOnly = true,
+                    Path = "/",
+                    Name = ".ElectronicStore.Security.Cookie",
+                    SameSite = SameSiteMode.Lax,
+                    SecurePolicy = CookieSecurePolicy.SameAsRequest
+                };
+            });
             #endregion
         }
 
@@ -35,6 +56,9 @@ namespace AspNetMvcCoreWebUI
             }
             app.UseSession();
             app.UseStaticFiles();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
