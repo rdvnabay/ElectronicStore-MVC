@@ -18,10 +18,10 @@ namespace Business.Abstract
         IResult Delete(Product product);
         IDataResult<List<Product>>GetSearchResult(string searchString);
         IDataResult<List<Product>> GetProductsOfByCategoryId(int categoryId,int page,int pageSize);
+        IDataResult<ProductDetailDto> GetProductDetails(int productId);
         //IDataResult<Product> GetById(int productId);
         //IDataResult<List<Product>> GetAllByCategoryId(int id);
         //IDataResult<List<Product>> GetUnitePrice(decimal min, decimal max);
-        //IDataResult<List<ProductDetailDto>> GetProductDetails();
 
     }
 }

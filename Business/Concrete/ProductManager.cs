@@ -101,6 +101,12 @@ namespace Business.Concrete
         }
         #endregion
 
+
+        public IDataResult<ProductDetailDto> GetProductDetails(int productId)
+        {
+            return new SuccessDataResult<ProductDetailDto>(_productDal.GetProductDetails(productId));
+
+        }
         //Business Rules Methods
         #region Business Rules 
         private IResult CheckIfProductNameAlreadyExist(string productName)

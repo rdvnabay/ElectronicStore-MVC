@@ -1,4 +1,5 @@
-﻿using AspNetMvcCoreWebUI.Models.Paging;
+﻿using AspNetMvcCoreWebUI.Models;
+using AspNetMvcCoreWebUI.Models.Paging;
 using Business.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -43,10 +44,10 @@ namespace AspNetMvcCoreWebUI.Controllers
 
 
         #region Detail
-        public IActionResult Detail(int id)
+        public IActionResult Detail(int productId)
         {
-            var model = _productService.GetById(id);
-            return View(model.Data);
+            var model = _productService.GetProductDetails(productId);
+            return View(model.Data); 
         }
         #endregion
     }
