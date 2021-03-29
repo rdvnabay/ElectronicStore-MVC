@@ -1,4 +1,4 @@
-﻿@model ProductDetailDto 
+﻿@model ProductDetailsModel 
 
     <!-- BREADCRUMB -->
 <div id="breadcrumb" class="section">
@@ -39,7 +39,7 @@
                 <!-- Product details -->
                 <div class="col-md-5">
                     <div class="product-details">
-                        <h2 class="product-name">@Model.Name</h2>
+                        <h2 class="product-name">@Model.Product.Name</h2>
                         <div>
                             <div class="product-rating">
                                 <i class="fa fa-star"></i>
@@ -51,10 +51,10 @@
                             <a class="review-link" href="#">10 Review(s) | Add your review</a>
                         </div>
                         <div>
-                            <h3 class="product-price">@Model.UnitPrice <del class="product-old-price">$990.00</del></h3>
+                            <h3 class="product-price">@Model.Product.UnitPrice <del class="product-old-price">$990.00</del></h3>
                             <span class="product-available">In Stock</span>
                         </div>
-                        <p>@Model.ShortDescription</p>
+                        <p>@Model.Product.Description</p>
 
                         <div class="product-options">
                             <label>
@@ -90,7 +90,7 @@
 
                         <ul class="product-links">
                             <li> Category:</li>
-                            <li><a href="#">@Model.CategoryName</a></li>
+                            <li><a href="#">@Model.Product.Description</a></li>
                         </ul>
 
                         <ul class="product-links">
@@ -120,7 +120,7 @@
                             <div id="tab1" class="tab-pane fade in active">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <p>@Model.Description</p>
+                                        <p>@Model.Product.Description</p>
                                     </div>
                                 </div>
                             </div>

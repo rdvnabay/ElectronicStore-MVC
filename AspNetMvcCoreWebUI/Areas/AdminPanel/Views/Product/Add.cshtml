@@ -25,7 +25,8 @@
                         <textarea id="editor" asp-for="Description"></textarea>
                     </div>
 
-                    @await Component.InvokeAsync(typeof(AspNetMvcCoreWebUI.Areas.AdminPanel.ViewComponents.CategoryList), new { categoryId = Model.CategoryId })
+                    @await Component.InvokeAsync(typeof(AspNetMvcCoreWebUI.Areas.AdminPanel.ViewComponents.CategoryList))
+                    @*, new { categoryId = Model.CategoryId }*@
                     <div class="form-group row">
                         <div class="col-md-6">
                             <label asp-for="UnitPrice">Fiyat (₺)</label>
@@ -49,7 +50,7 @@
                             <label class="custom-control-label" for="one-ecom-product-condition-old">Eski</label>
                         </div>
                     </div>
-                 
+
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -69,9 +70,9 @@
                                 </div>
                             </div>
                         </div>
-                     
+
                     </div>
-                    
+
                     <div class="form-group">
                         <button type="submit" class="btn btn-alt-success">Ürünü Ekle</button>
                     </div>

@@ -35,7 +35,7 @@ namespace Business.Concrete
         public IResult Add(Product product)
         {
             var result = BusinessRules.Run(CheckIfProductNameAlreadyExist(product.Name),
-                  CheckIfProductCountOfCategoryCorrect(product.CategoryId),
+                  //CheckIfProductCountOfCategoryCorrect(product.CategoryId),
                   CheckIfCategoryLimitExceded());
             if (result != null)
             {
@@ -92,20 +92,25 @@ namespace Business.Concrete
         #region GetProductsOfByCategoryId
         public IDataResult<List<Product>> GetProductsOfByCategoryId(int categoryId,int page, int pageSize)
         {
-            var data=_productDal.GetAll(p => p.CategoryId == categoryId);
-            if (data!=null)
-            {
-                return new SuccessDataResult<List<Product>>(_productDal.GetProductsOfByCategoryId(categoryId,page,pageSize));
-            }
+            //var data=_productDal.GetAll(p => p.CategoryId == categoryId);
+            //if (data!=null)
+            //{
+            //    return new SuccessDataResult<List<Product>>(_productDal.GetProductsOfByCategoryId(categoryId,page,pageSize));
+            //}
             return new SuccessDataResult<List<Product>>(_productDal.GetAll());
         }
         #endregion
 
 
-        public IDataResult<ProductDetailDto> GetProductDetails(int productId)
+        public IDataResult<Product> GetProductDetails(int productId)
         {
-            return new SuccessDataResult<ProductDetailDto>(_productDal.GetProductDetails(productId));
+            return new SuccessDataResult<Product>(_productDal.GetProductDetails(productId));
 
+        }
+
+        public IDataResult<List<Product>> GetProductsByCategory(string categoryName)
+        {
+            return new SuccessDataResult<List<Product>>(_productDal.GetProductsByCategory(categoryName));
         }
         //Business Rules Methods
         #region Business Rules 
@@ -121,11 +126,11 @@ namespace Business.Concrete
 
         private IResult CheckIfProductCountOfCategoryCorrect(int categoryId)
         {
-            var result = _productDal.GetAll(p => p.CategoryId == categoryId).Count;
-            if (result > 10)
-            {
-                new ErrorResult(Messages.CheckIfProductCountOfCategoryCorrect);
-            }
+            //var result = _productDal.GetAll(p => p.CategoryId == categoryId).Count;
+            //if (result > 10)
+            //{
+            //    new ErrorResult(Messages.CheckIfProductCountOfCategoryCorrect);
+            //}
             return new SuccessResult();
         }
 

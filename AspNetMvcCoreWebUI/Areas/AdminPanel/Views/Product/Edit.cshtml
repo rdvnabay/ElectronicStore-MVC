@@ -25,7 +25,8 @@
                         <textarea id="editor" asp-for="Description"></textarea>
                     </div>
 
-                    @await Component.InvokeAsync(typeof(AspNetMvcCoreWebUI.Areas.AdminPanel.ViewComponents.CategoryList), new { categoryId = Model.CategoryId })
+                    @await Component.InvokeAsync(typeof(AspNetMvcCoreWebUI.Areas.AdminPanel.ViewComponents.CategoryList))
+                    @*, new { categoryId = Model.CategoryId }*@
                     <div class="form-group row">
                         <div class="col-md-6">
                             <label asp-for="UnitPrice">Fiyat (₺)</label>

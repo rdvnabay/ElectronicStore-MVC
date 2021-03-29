@@ -16,12 +16,12 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.ViewComponents
             _categoryService = categoryService;
         }
 
-        public IViewComponentResult Invoke(int categoryId)
+        public IViewComponentResult Invoke(/*int categoryId*/)
         {
             var categoryList = new ProductCategoryListModel
             {
-                Categories = _categoryService.GetAll().Data,
-                CategoryId = categoryId
+                Categories = _categoryService.GetAll().Data
+                //CategoryId = categoryId
             };
                
             return View(categoryList);

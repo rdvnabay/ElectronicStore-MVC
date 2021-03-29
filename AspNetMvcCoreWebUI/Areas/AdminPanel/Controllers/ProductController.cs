@@ -139,5 +139,14 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
             return View();
         }
         #endregion
+
+        #region GetProductsByCategory
+        public IActionResult Deneme(string categoryName)
+        {
+            ViewBag.Categories = _categoryService.GetAll().Data;
+            var products = _productService.GetProductsByCategory(categoryName);
+            return View(products.Data);
+        }
+        #endregion
     }
 }

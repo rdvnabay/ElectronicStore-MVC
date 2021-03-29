@@ -20,11 +20,17 @@ namespace Business.DependencyResolvers
             builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
             builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
 
+            builder.RegisterType<EfContactDal>().As<IContactDal>().SingleInstance();
+            builder.RegisterType<ContactManager>().As<IContactService>().SingleInstance();
+
             builder.RegisterType<ImageManager>().As<IImageService>();
             builder.RegisterType<EfImageDal>().As<IImageDal>();
 
             builder.RegisterType<OrderManager>().As<IOrderService>();
             builder.RegisterType<EfOrderDal>().As<IOrderDal>();
+
+            builder.RegisterType<OrderDetailManager>().As<IOrderDetailService>();
+            builder.RegisterType<EfOrderDetailDal>().As<IOrderDetailDal>();
 
             builder.RegisterType<EfProductDal>().As<IProductDal>().SingleInstance();
             builder.RegisterType<ProductManager>().As<IProductService>().SingleInstance();

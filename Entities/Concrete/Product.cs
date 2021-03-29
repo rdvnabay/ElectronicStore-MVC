@@ -14,7 +14,8 @@ namespace Entities.Concrete
         public short UnitsInStock { get; set; }
         public decimal UnitPrice { get; set; }
 
-        public int CategoryId { get; set; }
+        public List<ProductCategory> ProductCategories { get; set; }
         public List<Image> Images { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
     }
 }

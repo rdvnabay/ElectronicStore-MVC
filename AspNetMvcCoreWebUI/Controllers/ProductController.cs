@@ -46,8 +46,13 @@ namespace AspNetMvcCoreWebUI.Controllers
         #region Detail
         public IActionResult Detail(int productId)
         {
-            var model = _productService.GetProductDetails(productId);
-            return View(model.Data); 
+            var product = _productService.GetProductDetails(productId).Data;
+            var model = new ProductDetailsModel
+            {
+                Product = product,
+                Images = product.Images.ToList()
+            };
+            return View(model); 
         }
         #endregion
     }

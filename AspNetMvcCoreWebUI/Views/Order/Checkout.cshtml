@@ -7,6 +7,15 @@
         <div class="row">
             <form method="post" asp-controller="Order" asp-action="Checkout">
                 <div class="col-md-7">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">@Model.Contact.Email</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@Model.Contact.FirstName @Model.Contact.LastName</h6>
+                            <p class="card-text">@Model.Contact.Address</p>
+                            <a href="#" class="card-link">@Model.Contact.District</a>
+                            <a href="#" class="card-link">@Model.Contact.City</a>
+                        </div>
+                    </div>
                     <!-- Billing Details -->
                     <div class="billing-details">
                         <div class="section-title">
@@ -14,90 +23,92 @@
                         </div>
 
                         <div class="form-group">
-                            <input class="input" asp-for="FirstName" placeholder="Adınız">
+                            <input class="input" asp-for="Contact.FirstName" placeholder="Adınız">
                         </div>
                         <div class="form-group">
-                            <input class="input" asp-for="LastName" placeholder="Soyadınız">
+                            <input class="input" asp-for="Contact.LastName" placeholder="Soyadınız">
                         </div>
                         <div class="form-group">
-                            <input class="input" asp-for="Email" placeholder="E-posta Adresiniz">
+                            <input class="input" asp-for="Contact.Email" placeholder="E-posta Adresiniz">
                         </div>
                         <div class="form-group">
-                            <input class="input" asp-for="Address" placeholder="Adres Bilgileri">
+                            <input class="input" asp-for="Contact.Address" placeholder="Adres Bilgileri">
                         </div>
                         <div class="form-group">
-                            <input class="input" asp-for="City" placeholder="Şehir">
+                            <input class="input" asp-for="Contact.City" placeholder="Şehir">
                         </div>
                         <div class="form-group">
-                            <input class="input" asp-for="Town" placeholder="İlçe">
+                            <input class="input" asp-for="Contact.District" placeholder="İlçe">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" asp-for="Contact.PhoneNumber" placeholder="Telefon Numarası">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" asp-for="Contact.UserId" placeholder="Telefon Numarası" value="2">
                         </div>
 
-                        <div class="form-group">
-                            <input class="input" asp-for="Phone" placeholder="Telefon Numarası">
-                        </div>
-         
 
-            <div class="form-group">
-                <div class="input-checkbox">
-                    <input type="checkbox" id="create-account">
-                    <label for="create-account">
-                        <span></span>
-                        Create Account?
-                    </label>
-                    <div class="caption">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-                        <input class="input" type="password" name="password" placeholder="Enter Your Password">
-                    </div>
-                </div>
-            </div>
-        </div>
-                <!-- /Billing Details -->
-                <!-- Shiping Details -->
-                <div class="shiping-details">
-                    <div class="section-title">
-                        <h3 class="title">Shiping address</h3>
-                    </div>
-                    <div class="input-checkbox">
-                        <input type="checkbox" id="shiping-address">
-                        <label for="shiping-address">
-                            <span></span>
-                            Ship to a diffrent address?
-                        </label>
-                        <div class="caption">
-                            <div class="form-group">
-                                <input class="input" type="text" name="first-name" placeholder="First Name">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="text" name="last-name" placeholder="Last Name">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="email" name="email" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="text" name="address" placeholder="Address">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="text" name="city" placeholder="City">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="text" name="country" placeholder="Country">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="text" name="zip-code" placeholder="ZIP Code">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="tel" name="tel" placeholder="Telephone">
+                        <div class="form-group">
+                            <div class="input-checkbox">
+                                <input type="checkbox" id="create-account">
+                                <label for="create-account">
+                                    <span></span>
+                                    Create Account?
+                                </label>
+                                <div class="caption">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+                                    <input class="input" type="password" name="password" placeholder="Enter Your Password">
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <!-- /Billing Details -->
+                    <!-- Shiping Details -->
+                    <div class="shiping-details">
+                        <div class="section-title">
+                            <h3 class="title">Shiping address</h3>
+                        </div>
+                        <div class="input-checkbox">
+                            <input type="checkbox" id="shiping-address">
+                            <label for="shiping-address">
+                                <span></span>
+                                Ship to a diffrent address?
+                            </label>
+                            <div class="caption">
+                                <div class="form-group">
+                                    <input class="input" type="text" name="first-name" placeholder="First Name">
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="text" name="last-name" placeholder="Last Name">
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="email" name="email" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="text" name="address" placeholder="Address">
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="text" name="city" placeholder="City">
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="text" name="country" placeholder="Country">
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="text" name="zip-code" placeholder="ZIP Code">
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="tel" name="tel" placeholder="Telephone">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Shiping Details -->
+                    <!-- Order notes -->
+                    <div class="order-notes">
+                        <textarea class="input" placeholder="Order Notes"></textarea>
+                    </div>
+                    <!-- /Order notes -->
                 </div>
-                <!-- /Shiping Details -->
-                <!-- Order notes -->
-                <div class="order-notes">
-                    <textarea class="input" placeholder="Order Notes"></textarea>
-                </div>
-                <!-- /Order notes -->
-            </div>
 
             <!-- Order Details -->
             <div class="col-md-5 order-details">

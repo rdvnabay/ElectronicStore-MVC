@@ -17,7 +17,7 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var result = from c in context.Categories
                              join p in context.Products
-                             on c.Id equals p.CategoryId
+                             on c.Id equals p.Id
                              group p by new { c.Id, c.Name } into cp
                              select new ProducCountOfCategoryDto
                              {

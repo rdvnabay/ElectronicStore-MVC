@@ -14,13 +14,19 @@ namespace AspNetMvcCoreWebUI.Controllers
     {
         #region Dependency Injection
         private IOrderService _orderService;
+        private IOrderDetailService _orderItemService;
         private ICartSessionService _cartSessionService;
+        private IContactService _contactService;
         public OrderController(
             ICartSessionService cartSessionService,
-            IOrderService orderService)
+            IOrderService orderService,
+            IOrderDetailService orderItemService,
+            IContactService contactService)
         {
             _cartSessionService = cartSessionService;
             _orderService = orderService;
+            _orderItemService = orderItemService;
+            _contactService = contactService;
         }
         #endregion
         public IActionResult Index()
@@ -32,7 +38,9 @@ namespace AspNetMvcCoreWebUI.Controllers
         {
             var model = new OrderViewModel
             {
-                Cart = _cartSessionService.GetCart()
+                Cart = _cartSessionService.GetCart(),
+                Contact=_contactService.GetById(2).Data
+                
             };
             return View(model);
         }
@@ -40,17 +48,10 @@ namespace AspNetMvcCoreWebUI.Controllers
         [HttpPost] 
         public IActionResult Checkout(OrderViewModel orderViewModel)
         {
-            var order = new Order
-            {
-                FirstName = orderViewModel.FirstName,
-                LastName = orderViewModel.LastName,
-                Email=orderViewModel.Email,
-                Phone=orderViewModel.Phone,
-                Town=orderViewModel.Town,
-                City=orderViewModel.City,
-                Address=orderViewModel.Address
-            };
-            _orderService.Add(order);
+            var contact = orderViewModel.Contact;
+            _contactService.Add(contact);
+
+            
             return RedirectToAction("Index","Home");
         }
     }
