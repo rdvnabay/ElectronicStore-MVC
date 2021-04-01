@@ -16,9 +16,9 @@ namespace Business.Concrete
         {
             _orderItemDal = orderItemDal;
         }
-        public IResult Add(OrderDetail orderItem)
+        public IResult Add(OrderDetail orderDetail)
         {
-            _orderItemDal.Add(orderItem);
+            _orderItemDal.Add(orderDetail);
             return new SuccessResult();
         }
     }

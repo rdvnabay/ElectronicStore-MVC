@@ -2,6 +2,7 @@
 using Business.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using Entities.DTOs.Panel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -18,15 +19,18 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
     {
         #region Dependency Injection
         IProductService _productService;
+        IProductDetailService _productDetailService;
         ICategoryService _categoryService;
         IImageService _imageService;
 
         public ProductController(
             IProductService productService,
+            IProductDetailService productDetailService,
             ICategoryService categoryService,
             IImageService imageService)
         {
             _productService = productService;
+            _productDetailService = productDetailService;
             _categoryService = categoryService;
             _imageService = imageService;
         }
@@ -44,23 +48,23 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
         #region Add
         public IActionResult Add()
         {
-            return View(new Product());
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(Product product, List<IFormFile> files)
+        public async Task<IActionResult> Add(ProductAddViewModel model, List<IFormFile> files)
         {
-
-            if (product == null)
+            if (model == null)
             {
-                return View(product);
+                return View(model);
             }
             if (files == null)
             {
-                return View(product);
+                return View(model);
             }
-            _productService.Add(product);
-            int productId = product.Id;
+            _productService.Add(model.Product);
+            _productDetailService.Add(model.ProductDetail);
+            int productId = model.Product.Id;
 
             foreach (var file in files)
             {
@@ -80,9 +84,7 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
                 {
                     await file.CopyToAsync(stream);
                 }
-
             }
-
             return RedirectToAction("Index", "Product");
         }
         #endregion
@@ -95,22 +97,22 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Product product, IFormFile file)
+        public async Task<IActionResult> Edit(Product product, IFormFile files)
         {
-            if (file == null)
+            if (files == null)
             {
                 return View();
             }
-            if (file != null)
+            if (files != null)
             {
-                var extention = Path.GetExtension(file.FileName);
+                var extention = Path.GetExtension(files.FileName);
                 var randomName = string.Format($"{DateTime.Now.Ticks}{extention}");
                 //product.Image = randomName;
                 var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\panel\\img", randomName);
 
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
-                    await file.CopyToAsync(stream);
+                    await files.CopyToAsync(stream);
                 }
             }
             _productService.Update(product);

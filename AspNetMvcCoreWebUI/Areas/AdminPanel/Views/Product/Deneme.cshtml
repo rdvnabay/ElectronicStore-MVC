@@ -24,7 +24,7 @@
                 @foreach (var category in ViewBag.Categories)
                 {
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Product" asp-action="Deneme" asp-route-category="@category.Name">@category.Name</a>
+                        <a class="nav-link" href="#@category.Name">@category.Name</a>
                     </li>
                 }
 

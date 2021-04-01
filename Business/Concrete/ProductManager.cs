@@ -8,6 +8,7 @@ using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using Entities.DTOs.Panel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -142,6 +143,16 @@ namespace Business.Concrete
                 return new ErrorResult(Messages.CategoryLimitExceded);
             }
             return new SuccessResult();
+        }
+
+        public IDataResult<List<ProductListDto>> NewProducts()
+        {
+            return new SuccessDataResult<List<ProductListDto>>(_productDal.NewProducts());
+        }
+
+        public IDataResult<List<ProductListDto>> TopSelling()
+        {
+            return new SuccessDataResult<List<ProductListDto>>(_productDal.TopSelling());
         }
         #endregion
     }

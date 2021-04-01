@@ -49,8 +49,9 @@ namespace AspNetMvcCoreWebUI.Controllers
             var product = _productService.GetProductDetails(productId).Data;
             var model = new ProductDetailsModel
             {
-                Product = product,
-                Images = product.Images.ToList()
+                Product = product
+                //Images = product.Images.ToList(),
+                //Categories=product.ProductCategories.Select(c=>c.Category).ToList()
             };
             return View(model); 
         }

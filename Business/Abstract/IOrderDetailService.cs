@@ -8,6 +8,6 @@ namespace Business.Abstract
 {
     public interface IOrderDetailService
     {
-        IResult Add(OrderDetail orderItem);
+        IResult Add(OrderDetail orderDetail);
     }
 }

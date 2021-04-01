@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\AdminPanel\Data\" />
     <Folder Include="wwwroot\panel\media\products\" />
     <Folder Include="wwwroot\panel\img\" />
   </ItemGroup>

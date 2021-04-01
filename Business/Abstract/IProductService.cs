@@ -1,6 +1,7 @@
 ﻿using Core.Utilities.Results.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using Entities.DTOs.Panel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,6 +18,8 @@ namespace Business.Abstract
         IResult Update(Product product);
         IResult Delete(Product product);
         IDataResult<List<Product>>GetSearchResult(string searchString);
+        IDataResult<List<ProductListDto>> TopSelling();
+        IDataResult<List<ProductListDto>>NewProducts();
         IDataResult<List<Product>> GetProductsOfByCategoryId(int categoryId,int page,int pageSize);
         IDataResult<Product> GetProductDetails(int productId);
         IDataResult<List<Product>> GetProductsByCategory(string categoryName);

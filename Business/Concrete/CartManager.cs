@@ -40,5 +40,10 @@ namespace Business.Concrete
             cart.CartLines.Remove(cart.CartLines.FirstOrDefault(c => c.Product.Id == productId));
         }
         #endregion
+
+        public void RemoveFromCartAll(Cart cart)
+        {
+            cart.CartLines.Remove(cart.CartLines.FirstOrDefault());
+        }
     }
 }

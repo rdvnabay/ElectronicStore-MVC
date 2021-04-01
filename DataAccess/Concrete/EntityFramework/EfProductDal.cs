@@ -7,21 +7,24 @@ using System.Linq;
 using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
 using Microsoft.EntityFrameworkCore;
+using Entities.DTOs.Panel;
 
 namespace DataAccess.Concrete.EntityFramework
 {
     public class EfProductDal : EfEntityRepositoryBase<Product, ElectronicShopDbContext>, IProductDal
     {
-
+       
         #region GetProductDetails
         public Product GetProductDetails(int productId)
         {
 
-            using (ElectronicShopDbContext context = new ElectronicShopDbContext())
+            using (var context = new ElectronicShopDbContext())
             {
                 return context.Products
                     .Where(p => p.Id == productId)
                     .Include(p => p.Images)
+                    .Include(p=>p.ProductCategories)
+                    .ThenInclude(p=>p.Category)
                     .FirstOrDefault();
             }
         }
@@ -84,6 +87,40 @@ namespace DataAccess.Concrete.EntityFramework
                     return products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
                 }
                 return products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            }
+        }
+
+        public List<ProductListDto> NewProducts()
+        {
+            using (var context=new ElectronicShopDbContext())
+            {
+                var result = from p in context.Products
+                             join pd in context.ProductDetails
+                             on p.Id equals pd.Id
+                             where pd.IsNewProduct==true
+                             select new ProductListDto
+                             {
+                                 Name = p.Name,
+                                 Price=p.UnitPrice,
+                             };
+                return result.ToList();
+            }
+        }
+
+        public List<ProductListDto> TopSelling()
+        {
+            using (var context = new ElectronicShopDbContext())
+            {
+                var result = from p in context.Products
+                             join pd in context.ProductDetails
+                             on p.Id equals pd.Id
+                             where pd.IsTopSelling == true
+                             select new ProductListDto
+                             {
+                                 Name = p.Name,
+                                 Price = p.UnitPrice,
+                             };
+                return result.ToList();
             }
         }
         #endregion
