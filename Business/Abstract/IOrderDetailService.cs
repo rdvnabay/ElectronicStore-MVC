@@ -9,5 +9,6 @@ namespace Business.Abstract
     public interface IOrderDetailService
     {
         IResult Add(OrderDetail orderDetail);
+        IDataResult<Order> GetOrderList(int userId);
     }
 }

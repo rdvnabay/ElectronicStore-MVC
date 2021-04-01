@@ -100,6 +100,7 @@ namespace DataAccess.Concrete.EntityFramework
                              where pd.IsNewProduct==true
                              select new ProductListDto
                              {
+                                 Id=p.Id,
                                  Name = p.Name,
                                  Price=p.UnitPrice,
                              };
@@ -117,6 +118,7 @@ namespace DataAccess.Concrete.EntityFramework
                              where pd.IsTopSelling == true
                              select new ProductListDto
                              {
+                                 Id = p.Id,
                                  Name = p.Name,
                                  Price = p.UnitPrice,
                              };

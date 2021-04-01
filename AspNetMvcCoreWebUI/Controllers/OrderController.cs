@@ -1,4 +1,5 @@
 ﻿using AspNetMvcCoreWebUI.Models;
+using AspNetMvcCoreWebUI.Models.OrderModel;
 using AspNetMvcCoreWebUI.Services;
 using Business.Abstract;
 using Entities.Concrete;
@@ -42,24 +43,23 @@ namespace AspNetMvcCoreWebUI.Controllers
         #region Checkout
         public IActionResult Contact()
         {
-            var model = new OrderViewModel
+            var model = new ContactViewModel
             {
                 Cart = _cartSessionService.GetCart(),
                 Contact = new Contact()
-                //Contact=_contactService.GetById(2).Data
             };
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Contact(OrderViewModel orderViewModel)
+        public IActionResult Contact(ContactViewModel contactViewModel)
         {
-            if (orderViewModel == null)
+            if (contactViewModel == null)
             {
-                return View(orderViewModel);
+                return View(contactViewModel);
             }
-
-            var contact = orderViewModel.Contact;
+            contactViewModel.Contact.UserId = 1;
+            var contact = contactViewModel.Contact;
             _contactService.Add(contact);
             return RedirectToAction("Checkout", "Order");
         }
@@ -67,7 +67,7 @@ namespace AspNetMvcCoreWebUI.Controllers
         #region Checkout
         public IActionResult Checkout()
         {
-            var model = new OrderViewModel
+            var model = new CartInfoViewModel
             {
                 Cart = _cartSessionService.GetCart()
             };
@@ -75,7 +75,7 @@ namespace AspNetMvcCoreWebUI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Checkout(OrderViewModel orderViewModel)
+        public IActionResult Checkout(CartInfoViewModel cartInfoViewModel)
         {
             var orderItems = _cartSessionService.GetCart();
             var order = new Order();

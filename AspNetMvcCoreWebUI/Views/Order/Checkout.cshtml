@@ -1,4 +1,4 @@
-﻿@model OrderViewModel
+﻿@model CartInfoViewModel
     <!-- SECTION -->
 <div class="section">
     <!-- container -->
@@ -9,11 +9,11 @@
                 <div class="col-md-7">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
-                            <h5 class="card-title">@Model.Contact.Email</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">@Model.Contact.FirstName @Model.Contact.LastName</h6>
-                            <p class="card-text">@Model.Contact.Address</p>
-                            <a href="#" class="card-link">@Model.Contact.District</a>
-                            <a href="#" class="card-link">@Model.Contact.City</a>
+                            <h5 class="card-title">@Model.CardName</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@Model..FirstName @Model.CardNumber</h6>
+                            <p class="card-text">@Model.ExpirationMonth</p>
+                            <a href="#" class="card-link">@Model.ExpirationYear</a>
+                            <a href="#" class="card-link">@Model.Cvv</a>
                         </div>
                     </div>
                     <!-- Billing Details -->

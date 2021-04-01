@@ -6,7 +6,8 @@ using System.Text;
 
 namespace DataAccess.Abstract
 {
-    public interface IOrderDetailDal:IEntityRepository<OrderDetail>
+    public interface IOrderDetailDal : IEntityRepository<OrderDetail>
     {
+        Order GetOrderList(int userId);
     }
 }

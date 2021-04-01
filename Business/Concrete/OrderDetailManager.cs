@@ -21,5 +21,10 @@ namespace Business.Concrete
             _orderItemDal.Add(orderDetail);
             return new SuccessResult();
         }
+
+        public IDataResult<Order> GetOrderList(int userId)
+        {
+            return new SuccessDataResult<Order>(_orderItemDal.GetOrderList(userId));
+        }
     }
 }
