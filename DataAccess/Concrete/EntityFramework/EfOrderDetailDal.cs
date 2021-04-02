@@ -1,6 +1,7 @@
 ﻿using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,30 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfOrderDetailDal : EfEntityRepositoryBase<OrderDetail, ElectronicShopDbContext>, IOrderDetailDal
     {
-        public Order GetOrderList(int userId)
+        public List<UserOrderListDto> GetOrderList(int userId)
         {
             using (var context = new ElectronicShopDbContext())
             {
-                return context.Orders
-                      .Where(o => o.UserId == userId)
-                      .Include(o => o.OrderDetails)
-                      .ThenInclude(o => o.Product)
-                      .FirstOrDefault();
+                var result = from o in context.Orders
+                             join od in context.OrderDetails
+                             on o.Id equals od.OrderId
+                             join p in context.Products
+                             on od.ProductId equals p.Id
+                             where o.UserId == userId
+                             select new UserOrderListDto
+                             {
+                                 OrderId=o.Id,
+                                 Name=p.Name,
+                                 Quantity=od.Quantity,
+                                 Price=od.Price
+                             };
+
+                           return result.ToList();
+                //return context.Orders
+                //      .Where(o => o.UserId == userId)
+                //      .Include(o => o.OrderDetails)
+                //      .ThenInclude(o => o.Product)
+                //      .FirstOrDefault();
             }
         }
     }

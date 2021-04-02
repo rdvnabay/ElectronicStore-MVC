@@ -1,4 +1,4 @@
-﻿@model UserOrdersViewModel
+﻿@model List<UserOrderListDto>
 <div class="container">
     <div class="row">
         <div class="col-md-8">
@@ -12,20 +12,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var order in Model.Orders)
+                    @foreach (var product in Model)
                     {
-                        @foreach (var product in Model.Products)
-                        {
-                            <tr>
-                                <td></td>
-                                <td>@product.Name</td>
-                                <td>3</td>
-                                <td>@product.UnitPrice</td>
-                            </tr>
-                        }
-
+                        <tr>
+                            <td></td>
+                            <td>@product.Name</td>
+                            <td>@product.Quantity</td>
+                            <td>@product.Price</td>
+                        </tr>
                     }
-
                 </tbody>
             </table>
         </div>

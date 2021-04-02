@@ -3,6 +3,7 @@ using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,9 +23,9 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        public IDataResult<Order> GetOrderList(int userId)
+        public IDataResult<List<UserOrderListDto>> GetOrderList(int userId)
         {
-            return new SuccessDataResult<Order>(_orderItemDal.GetOrderList(userId));
+            return new SuccessDataResult<List<UserOrderListDto>>(_orderItemDal.GetOrderList(userId));
         }
     }
 }

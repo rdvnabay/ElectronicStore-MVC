@@ -1,5 +1,6 @@
 ﻿using AspNetMvcCoreWebUI.Models.OrderModel;
 using Business.Abstract;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -23,17 +24,12 @@ namespace AspNetMvcCoreWebUI.Controllers
         public IActionResult Orders()
         {
             var userId = 2;
-            var order = _orderDetailService.GetOrderList(userId).Data;
-            if (order == null)
+            var model = _orderDetailService.GetOrderList(userId);
+            if (model == null)
             {
                 return View();
             }
-            var model = new UserOrdersViewModel
-            {
-                Orders =    order.OrderDetails.Select(p => p.Order).ToList(),
-                Products = order.OrderDetails.Select(p => p.Product).ToList()
-            };
-            return View(model);
+            return View(model.Data);
         }
     }
 }
