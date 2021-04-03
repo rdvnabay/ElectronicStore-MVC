@@ -90,15 +90,15 @@ namespace Business.Concrete
         }
         #endregion
 
-        #region GetProductsOfByCategoryId
-        public IDataResult<List<Product>> GetProductsOfByCategoryId(int categoryId,int page, int pageSize)
+        #region GetProductsOfByCategory
+        public IDataResult<List<Product>> GetProductsByCategory(string categoryName,int page, int pageSize)
         {
-            //var data=_productDal.GetAll(p => p.CategoryId == categoryId);
-            //if (data!=null)
+            //var data = _productDal.GetAll(p => p.ProductCategories.Select(c=>c.Category.Name.Contains(categoryName));
+            //if (data != null)
             //{
-            //    return new SuccessDataResult<List<Product>>(_productDal.GetProductsOfByCategoryId(categoryId,page,pageSize));
+            //    return new SuccessDataResult<List<Product>>(_productDal.GetProductsOfByCategory(categoryName, search, page, pageSize));
             //}
-            return new SuccessDataResult<List<Product>>(_productDal.GetAll());
+            return new SuccessDataResult<List<Product>>(_productDal.GetProductsByCategory(categoryName, page, pageSize));
         }
         #endregion
 
@@ -109,10 +109,6 @@ namespace Business.Concrete
 
         }
 
-        public IDataResult<List<Product>> GetProductsByCategory(string categoryName)
-        {
-            return new SuccessDataResult<List<Product>>(_productDal.GetProductsByCategory(categoryName));
-        }
         //Business Rules Methods
         #region Business Rules 
         private IResult CheckIfProductNameAlreadyExist(string productName)
@@ -153,6 +149,11 @@ namespace Business.Concrete
         public IDataResult<List<ProductListDto>> TopSelling()
         {
             return new SuccessDataResult<List<ProductListDto>>(_productDal.TopSelling());
+        }
+
+        public IDataResult<List<Product>> GetProductsAll(int page, int pageSize)
+        {
+            return new SuccessDataResult<List<Product>>(_productDal.GetProductsAll(page, pageSize));
         }
         #endregion
     }

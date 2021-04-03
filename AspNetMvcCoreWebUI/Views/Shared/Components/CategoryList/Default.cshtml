@@ -1,2 +1,31 @@
-﻿<!-- TODO: Category List: İlerleyen durumlara göre kullanabilirim veya silebilirim-->
+﻿@model List<ProducCountOfCategoryDto>
+ <!-- aside Widget -->
+<div class="aside">
+    <h3 class="aside-title">Categories</h3>
+    <div class="checkbox-filter">
+        <div class="input-checkbox">
+            <span>
+                <a asp-controller="Product" asp-action="Index" asp-route-categoryName="">
+                    Tüm Ürünler
+                </a>
+            </span>
+        </div>
+        @foreach (var category in Model)
+        {
+            <div class="input-checkbox">
+                @*<input type="checkbox" id="category-1" >*@
+                <label asp-for="@category.CategoryId">
+                    <span>
+                        <a asp-controller="Product" asp-action="Index" asp-route-categoryName="@category.CategoryName">
+                            @category.CategoryName
+                        </a>
+                    </span>
 
+                    <small>(@category.ProductCount)</small>
+                </label>
+            </div>
+        }
+
+    </div>
+</div>
+<!-- /aside Widget -->

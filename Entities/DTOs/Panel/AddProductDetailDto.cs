@@ -7,7 +7,8 @@ namespace Entities.DTOs.Panel
 {
    public class AddProductDetailDto:IDto
     {
-        public int Id { get; set; }
+        public int ProductId { get; set; }
+        public int CategoryId { get; set; }
         public string Name { get; set; }
         public string ShortDescription { get; set; }
         public string Description { get; set; }

@@ -8,6 +8,8 @@ namespace Business.Abstract
 {
     public interface IProductDetailService
     {
-        IDataResult<ProductDetail> Add(ProductDetail productDetail);
+        IResult Add(ProductDetail productDetail);
+        IResult Update(ProductDetail productDetail);
+        IDataResult<ProductDetail> GetById(int id);
     }
 }

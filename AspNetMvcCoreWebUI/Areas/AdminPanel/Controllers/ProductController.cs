@@ -107,7 +107,6 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
             {
                 var extention = Path.GetExtension(files.FileName);
                 var randomName = string.Format($"{DateTime.Now.Ticks}{extention}");
-                //product.Image = randomName;
                 var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\panel\\img", randomName);
 
                 using (var stream = new FileStream(path, FileMode.Create))
@@ -142,13 +141,5 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
         }
         #endregion
 
-        #region GetProductsByCategory
-        public IActionResult Deneme(string categoryName)
-        {
-            ViewBag.Categories = _categoryService.GetAll().Data;
-            var products = _productService.GetProductsByCategory(categoryName);
-            return View(products.Data);
-        }
-        #endregion
     }
 }

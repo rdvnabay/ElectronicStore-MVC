@@ -63,10 +63,10 @@ namespace AspNetMvcCoreWebUI
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllerRoute(
-                //  name: "products",
-                //  pattern: "products/{action=Index}/{id?}");
-                  
+                endpoints.MapControllerRoute(
+                  name: "products",
+                  pattern: "products/{categoryName?}",
+                  defaults: new { controller = "Product", action = "Index" });
 
                 endpoints.MapControllerRoute(
                    name: "adminPanel",

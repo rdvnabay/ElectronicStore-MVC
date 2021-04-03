@@ -5,23 +5,25 @@
             <table class="table table-responsive">
                 <thead>
                     <tr>
-                        <td></td>
-                        <td>Ürün Adı</td>
-                        <td>Adeti</td>
-                        <td>Fiyatı</td>
+                        <th></th>
+                        <th>Tarih</th>
+                        <th>Ürün Adı</th>
+                        <th>Adeti</th>
+                        <th>Fiyatı</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach (var product in Model)
-                    {
+                @foreach (var product in Model)
+                {
+                    <tbody>
                         <tr>
                             <td></td>
+                            <td>@product.OrderDate</td>
                             <td>@product.Name</td>
                             <td>@product.Quantity</td>
                             <td>@product.Price</td>
                         </tr>
-                    }
-                </tbody>
+                    </tbody>
+                }
             </table>
         </div>
     </div>

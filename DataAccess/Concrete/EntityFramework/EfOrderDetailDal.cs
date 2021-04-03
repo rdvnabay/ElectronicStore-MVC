@@ -22,13 +22,15 @@ namespace DataAccess.Concrete.EntityFramework
                              join p in context.Products
                              on od.ProductId equals p.Id
                              where o.UserId == userId
+                             
                              select new UserOrderListDto
                              {
                                  OrderId=o.Id,
+                                 OrderDate=o.OrderDate,
                                  Name=p.Name,
                                  Quantity=od.Quantity,
                                  Price=od.Price
-                             };
+                            };
 
                            return result.ToList();
                 //return context.Orders

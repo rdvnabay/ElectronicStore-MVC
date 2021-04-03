@@ -22,13 +22,13 @@ namespace AspNetMvcCoreWebUI.TagHelpers
             for (int i = 1; i <= PageModel.TotalPages(); i++)
             {
                 stringBuilder.AppendFormat("<li class='{0}'>", i == PageModel.CurrentPage ? "active" : "");
-                if (PageModel.CurrentCategoryId <= 0)
+                if (string.IsNullOrEmpty(PageModel.CurrentCategoryName))
                 {
                     stringBuilder.AppendFormat("<a href='/products?page={0}'>{0}</a>", i);
                 }
                 else
                 {
-                    stringBuilder.AppendFormat("<a href='/products/{0}?page={1}'>{1}</a>", PageModel.CurrentCategoryId, i);
+                    stringBuilder.AppendFormat("<a href='/products/{0}?page={1}'>{1}</a>", PageModel.CurrentCategoryName, i);
                 }
                 stringBuilder.Append("</li>");
             }

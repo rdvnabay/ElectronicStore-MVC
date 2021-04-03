@@ -8,6 +8,7 @@ namespace Entities.DTOs
    public class UserOrderListDto:IDto
     {
         public int OrderId { get; set; }
+        public DateTime OrderDate { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
         public int Quantity { get; set; }

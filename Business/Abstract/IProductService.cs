@@ -20,12 +20,8 @@ namespace Business.Abstract
         IDataResult<List<Product>>GetSearchResult(string searchString);
         IDataResult<List<ProductListDto>> TopSelling();
         IDataResult<List<ProductListDto>>NewProducts();
-        IDataResult<List<Product>> GetProductsOfByCategoryId(int categoryId,int page,int pageSize);
+        IDataResult<List<Product>> GetProductsAll(int page, int pageSize);
+        IDataResult<List<Product>> GetProductsByCategory(string categoryName,int page,int pageSize);
         IDataResult<Product> GetProductDetails(int productId);
-        IDataResult<List<Product>> GetProductsByCategory(string categoryName);
-        //IDataResult<Product> GetById(int productId);
-        //IDataResult<List<Product>> GetAllByCategoryId(int id);
-        //IDataResult<List<Product>> GetUnitePrice(decimal min, decimal max);
-
     }
 }

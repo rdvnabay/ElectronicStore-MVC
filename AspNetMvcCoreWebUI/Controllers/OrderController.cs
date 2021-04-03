@@ -58,7 +58,7 @@ namespace AspNetMvcCoreWebUI.Controllers
             {
                 return View(contactViewModel);
             }
-            contactViewModel.Contact.UserId = 3;
+            contactViewModel.Contact.UserId = 1;
             var contact = contactViewModel.Contact;
             _contactService.Add(contact);
             return RedirectToAction("Checkout", "Order");
@@ -81,7 +81,7 @@ namespace AspNetMvcCoreWebUI.Controllers
             var order = new Order();
             order.OrderDate = DateTime.Now;
             order.OrderStatus = "onaylandı";
-            order.UserId = 3;
+            order.UserId = 1;
             order.PaymentType = "Credit Cart";
             _orderService.Add(order);
             foreach (var item in orderItems.CartLines)

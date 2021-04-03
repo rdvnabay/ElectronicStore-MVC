@@ -23,7 +23,7 @@ namespace AspNetMvcCoreWebUI.Controllers
 
         public IActionResult Orders()
         {
-            var userId = 2;
+            var userId = 1;
             var model = _orderDetailService.GetOrderList(userId);
             if (model == null)
             {

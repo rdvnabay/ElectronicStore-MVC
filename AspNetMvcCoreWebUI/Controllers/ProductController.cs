@@ -21,24 +21,34 @@ namespace AspNetMvcCoreWebUI.Controllers
 
         //Methods
         #region Index
-        //[Route("products/{categoryId?}")]
-        public IActionResult Index(int categoryId,int page=1)
+        public IActionResult Index(string categoryName, int page=1)
         {
             const int pageSize = 3;
+            if (string.IsNullOrEmpty(categoryName))
+            {
+                return View(new ProductListViewModel()
+                {
+                    Products = _productService.GetProductsAll(page, pageSize).Data,
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = pageSize,
+                        TotalItems = _productService.GetAll().Data.Count
+                    }
+                });
+            }
 
             return View(new ProductListViewModel()
             {
-                Products = _productService.GetProductsOfByCategoryId(categoryId,page,pageSize).Data,
+                Products = _productService.GetProductsByCategory(categoryName,page,pageSize).Data,
                 PagingInfo = new PagingInfo
                 {
-                    CurrentCategoryId = categoryId,
+                    CurrentCategoryName = categoryName,
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
-                    TotalItems = _productService.GetAll().Data.Count
+                    TotalItems = _productService.GetAll().Data.Where(c=>c.Name==categoryName).Count()
                 }
             });
-            //var model= _productService.GetProductsOfByCategoryId(categoryId);
-            //return View(model.Data);
         }
         #endregion
 
@@ -49,9 +59,9 @@ namespace AspNetMvcCoreWebUI.Controllers
             var product = _productService.GetProductDetails(productId).Data;
             var model = new ProductDetailsModel
             {
-                Product = product
-                //Images = product.Images.ToList(),
-                //Categories=product.ProductCategories.Select(c=>c.Category).ToList()
+                Product = product,
+                Images = product.Images.ToList(),
+                Categories = product.ProductCategories.Select(c => c.Category).ToList()
             };
             return View(model); 
         }

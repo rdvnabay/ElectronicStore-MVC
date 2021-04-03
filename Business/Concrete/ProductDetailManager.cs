@@ -16,10 +16,21 @@ namespace Business.Concrete
         {
             _productDetailDal = productDetailDal;
         }
-        public IDataResult<ProductDetail> Add(ProductDetail productDetail)
+        public IResult Add(ProductDetail productDetail)
         {
             _productDetailDal.Add(productDetail);
-            return new SuccessDataResult<ProductDetail>();
+            return new SuccessResult();
+        }
+
+        public IDataResult<ProductDetail> GetById(int id)
+        {
+            return new SuccessDataResult<ProductDetail>(_productDetailDal.Get(pd => pd.Id == id));
+        }
+
+        public IResult Update(ProductDetail productDetail)
+        {
+            _productDetailDal.Update(productDetail);
+            return new SuccessResult();
         }
     }
 }

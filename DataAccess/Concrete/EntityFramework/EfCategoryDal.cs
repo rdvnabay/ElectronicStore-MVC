@@ -13,20 +13,26 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public List<ProducCountOfCategoryDto> ProductCountOfCategory()
         {
+            /*
+             select pc.CategoryId,count(pc.ProductId) from Categories c
+inner join ProductCategories pc
+on c.Id=pc.CategoryId
+group by pc.CategoryId
+             */
             using (var context = new ElectronicShopDbContext())
             {
                 var result = from c in context.Categories
-                             join p in context.Products
-                             on c.Id equals p.Id
-                             group p by new { c.Id, c.Name } into cp
+                             join pc in context.ProductCategories
+                             on c.Id equals pc.CategoryId
+                             group pc by new { pc.CategoryId, pc.Category.Name } into pc
                              select new ProducCountOfCategoryDto
                              {
-                                 CategoryId = cp.Key.Id,
-                                 CategoryName = cp.Key.Name,
-                                 ProductCount=cp.Count() 
+                                 CategoryId = pc.Key.CategoryId,
+                                 CategoryName = pc.Key.Name,
+                                 ProductCount = pc.Count()
                              };
                 return result.ToList();
             }
-        }  
+        }
     }
 }

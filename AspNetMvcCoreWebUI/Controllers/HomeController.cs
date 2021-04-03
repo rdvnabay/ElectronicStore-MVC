@@ -23,15 +23,9 @@ namespace AspNetMvcCoreWebUI.Controllers
         #endregion
 
         #region Index
-        public IActionResult Index(string searchString)
+        public IActionResult Index()
         {
             
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                var model = _productService.GetSearchResult(searchString);
-                return View(model.Data);
-            }
-
             return View(_productService.GetAll().Data);
         }
         #endregion
