@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Entities.DTOs.Panel
 {
-   public class AddProductDetailDto:IDto
+   public class AddProductDto:IDto
     {
-        public int ProductId { get; set; }
-        public int CategoryId { get; set; }
+        public int Id { get; set; }
+        //public int CategoryId { get; set; }
         public string Name { get; set; }
         public string ShortDescription { get; set; }
         public string Description { get; set; }

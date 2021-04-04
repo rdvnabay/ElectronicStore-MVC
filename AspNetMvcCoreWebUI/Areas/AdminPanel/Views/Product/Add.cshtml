@@ -1,4 +1,4 @@
-﻿@model ProductAddViewModel
+﻿@model AddProductDetailDto
 
 <link rel="stylesheet" href="~/panel/js/plugins/select2/css/select2.min.css">
 <link rel="stylesheet" href="~/panel/js/plugins/dropzone/dist/min/dropzone.min.css">
@@ -13,16 +13,16 @@
                 <div class="col-md-10 col-lg-8">
 
                     <div class="form-group">
-                        <label asp-for="Product.Name">Ürün Adı</label>
-                        <input asp-for="Product.Name" class="form-control">
+                        <label asp-for="Name">Ürün Adı</label>
+                        <input asp-for="Name" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label asp-for="Product.ShortDescription">Özet Bilgi</label>
-                        <textarea class="form-control" asp-for="Product.ShortDescription" rows="4"></textarea>
+                        <label asp-for="ShortDescription">Özet Bilgi</label>
+                        <textarea class="form-control" asp-for="ShortDescription" rows="4"></textarea>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Product.Description">Açıklama</label>
-                        <textarea id="editor" asp-for="Product.Description"></textarea>
+                        <label asp-for="Description">Açıklama</label>
+                        <textarea id="editor" asp-for="Description"></textarea>
                     </div>
 
                 </div>
@@ -31,14 +31,14 @@
                     @*, new { categoryId = Model.CategoryId }*@
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <label asp-for="Product.UnitPrice">Fiyat (₺)</label>
-                            <input asp-for="Product.UnitPrice" class="form-control">
+                            <label asp-for="UnitPrice">Fiyat (₺)</label>
+                            <input asp-for="UnitPrice" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <label asp-for="Product.UnitsInStock">Stok</label>
-                            <input asp-for="Product.UnitsInStock" class="form-control">
+                            <label asp-for="UnitsInStock">Stok</label>
+                            <input asp-for="UnitsInStock" class="form-control">
                         </div>
                     </div>
 
@@ -46,32 +46,32 @@
                     <div class="form-group">
                         <label>Aktif Ürün</label>
                         <div class="custom-control custom-switch mb-1">
-                            <input asp-for="ProductDetail.IsActive" type="checkbox" class="custom-control-input">
-                            <label class="custom-control-label" asp-for="ProductDetail.IsActive"></label>
+                            <input asp-for="IsActive" type="checkbox" class="custom-control-input">
+                            <label class="custom-control-label" asp-for="IsActive"></label>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>Anasayfa</label>
                         <div class="custom-control custom-switch mb-1">
-                            <input asp-for="ProductDetail.IsHome" type="checkbox" class="custom-control-input">
-                            <label class="custom-control-label" asp-for="ProductDetail.IsHome"></label>
+                            <input asp-for="IsHome" type="checkbox" class="custom-control-input">
+                            <label class="custom-control-label" asp-for="IsHome"></label>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>Yeni Ürün</label>
                         <div class="custom-control custom-switch mb-1">
-                            <input asp-for="ProductDetail.IsNewProduct" type="checkbox" class="custom-control-input">
-                            <label class="custom-control-label" asp-for="ProductDetail.IsNewProduct"></label>
+                            <input asp-for="IsNewProduct" type="checkbox" class="custom-control-input">
+                            <label class="custom-control-label" asp-for="IsNewProduct"></label>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>En Çok Satanlar</label>
                         <div class="custom-control custom-switch mb-1">
-                            <input asp-for="ProductDetail.IsTopSelling" type="checkbox" class="custom-control-input">
-                            <label class="custom-control-label" asp-for="ProductDetail.IsTopSelling"></label>
+                            <input asp-for="IsTopSelling" type="checkbox" class="custom-control-input">
+                            <label class="custom-control-label" asp-for="IsTopSelling"></label>
                         </div>
                     </div>
 

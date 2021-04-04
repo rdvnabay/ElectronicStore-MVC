@@ -1,4 +1,5 @@
 ﻿using AspNetMvcCoreWebUI.Areas.AdminPanel.Models;
+using AutoMapper;
 using Business.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -18,21 +19,24 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
     public class ProductController : Controller
     {
         #region Dependency Injection
-        IProductService _productService;
-        IProductDetailService _productDetailService;
-        ICategoryService _categoryService;
-        IImageService _imageService;
+        private IProductService _productService;
+        private IProductDetailService _productDetailService;
+        private ICategoryService _categoryService;
+        private IImageService _imageService;
+        private IMapper _mapper;
 
         public ProductController(
             IProductService productService,
             IProductDetailService productDetailService,
             ICategoryService categoryService,
-            IImageService imageService)
+            IImageService imageService,
+            IMapper mapper)
         {
             _productService = productService;
             _productDetailService = productDetailService;
             _categoryService = categoryService;
             _imageService = imageService;
+            _mapper = mapper;
         }
         #endregion
 
@@ -52,8 +56,10 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(ProductAddViewModel model, List<IFormFile> files)
+        public async Task<IActionResult> Add(AddProductDto model, List<IFormFile> files)
         {
+            var product = _mapper.Map<Product>(model);
+            var productDetail = _mapper.Map<ProductDetail>(model);
             if (model == null)
             {
                 return View(model);
@@ -62,28 +68,28 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
             {
                 return View(model);
             }
-            _productService.Add(model.Product);
-            _productDetailService.Add(model.ProductDetail);
-            int productId = model.Product.Id;
+            _productService.Add(product);
+
+            productDetail.Id = product.Id;
+            _productDetailService.Add(productDetail);
 
             foreach (var file in files)
             {
                 var extention = Path.GetExtension(file.FileName);
                 var fileName = string.Format($"{DateTime.Now.Ticks}{extention}");
                 var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\panel\\img", fileName);
-                var images = new List<Image>
-                {
-                  new Image{Name=fileName, ProductId=productId}
-                };
-                foreach (var image in images)
-                {
-                    _imageService.Add(image);
-                }
 
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
                 }
+                var image = new Image()
+                {
+                    Name = fileName,
+                    ProductId = product.Id
+                };
+                //model.Images.Add(image);
+                _imageService.Add(image);
             }
             return RedirectToAction("Index", "Product");
         }

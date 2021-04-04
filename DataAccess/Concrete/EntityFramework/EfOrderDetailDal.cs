@@ -33,12 +33,13 @@ namespace DataAccess.Concrete.EntityFramework
                             };
 
                            return result.ToList();
-                //return context.Orders
-                //      .Where(o => o.UserId == userId)
-                //      .Include(o => o.OrderDetails)
-                //      .ThenInclude(o => o.Product)
-                //      .FirstOrDefault();
-            }
+              
         }
     }
+}
+    //return context.Orders
+    //      .Where(o => o.UserId == userId)
+    //      .Include(o => o.OrderDetails)
+    //      .ThenInclude(o => o.Product)
+    //      .FirstOrDefault();
 }

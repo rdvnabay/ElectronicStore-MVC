@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ElectronicShopDbContext))]
-    [Migration("20210401170920_AddedProductDetailEntity")]
-    partial class AddedProductDetailEntity
+    [Migration("20210404145649_addedIsMain_ImageEntity")]
+    partial class addedIsMain_ImageEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -151,6 +151,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -232,9 +235,6 @@ namespace DataAccess.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProductDetailId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ShortDescription")
                         .HasColumnType("nvarchar(max)");
 
@@ -245,8 +245,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("smallint");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductDetailId");
 
                     b.ToTable("Products");
                 });
@@ -276,9 +274,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Entities.Concrete.ProductDetail", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -345,13 +341,6 @@ namespace DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Entities.Concrete.Product", b =>
-                {
-                    b.HasOne("Entities.Concrete.ProductDetail", "ProductDetail")
-                        .WithMany()
-                        .HasForeignKey("ProductDetailId");
-                });
-
             modelBuilder.Entity("Entities.Concrete.ProductCategory", b =>
                 {
                     b.HasOne("Entities.Concrete.Category", "Category")
@@ -363,6 +352,15 @@ namespace DataAccess.Migrations
                     b.HasOne("Entities.Concrete.Product", "Product")
                         .WithMany("ProductCategories")
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Entities.Concrete.ProductDetail", b =>
+                {
+                    b.HasOne("Entities.Concrete.Product", "Product")
+                        .WithOne("ProductDetail")
+                        .HasForeignKey("Entities.Concrete.ProductDetail", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

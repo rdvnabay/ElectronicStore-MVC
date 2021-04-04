@@ -19,6 +19,7 @@ namespace AspNetMvcCoreWebUI
         {
             services.AddMvc()
                 .AddSessionStateTempDataProvider();
+            services.AddAutoMapper(typeof(Startup));
             #region Session Settings
             services.AddSingleton<ICartSessionService, CartSessionService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -31,8 +32,8 @@ namespace AspNetMvcCoreWebUI
             {
                 options.LoginPath = "/Account/Login";
                 options.LogoutPath = "/Account/Logout";
-                options.AccessDeniedPath = "/Account/AccessDenied"; 
-                options.SlidingExpiration = true; 
+                options.AccessDeniedPath = "/Account/AccessDenied";
+                options.SlidingExpiration = true;
                 options.ExpireTimeSpan = TimeSpan.FromDays(1);
 
                 options.Cookie = new CookieBuilder()
@@ -58,24 +59,36 @@ namespace AspNetMvcCoreWebUI
             app.UseStaticFiles();
 
             app.UseAuthentication();
-      
+
             app.UseRouting();
             app.UseAuthorization();
+
+            #region Routing Settings
             app.UseEndpoints(endpoints =>
             {
+                #region Panel
                 endpoints.MapControllerRoute(
-                  name: "products",
-                  pattern: "products/{categoryName?}",
-                  defaults: new { controller = "Product", action = "Index" });
+               name: "products",
+               pattern: "{area:exists}/products",
+               defaults: new { controller = "Product", action = "Index" });
 
                 endpoints.MapControllerRoute(
-                   name: "adminPanel",
-                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                name: "adminPanel",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                #endregion
+
+                #region Site
+                endpoints.MapControllerRoute(
+                name: "products",
+                pattern: "products/{categoryName?}",
+                defaults: new { controller = "Product", action = "Index" });
 
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");   
+                   name: "default",
+                   pattern: "{controller=Home}/{action=Index}/{id?}");
+                #endregion  
             });
+            #endregion
         }
     }
 }

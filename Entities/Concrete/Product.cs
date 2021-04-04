@@ -15,6 +15,7 @@ namespace Entities.Concrete
         public decimal UnitPrice { get; set; }
 
 
+        public ProductDetail ProductDetail { get; set; }
         public List<ProductCategory> ProductCategories { get; set; }
         public List<Image> Images { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }

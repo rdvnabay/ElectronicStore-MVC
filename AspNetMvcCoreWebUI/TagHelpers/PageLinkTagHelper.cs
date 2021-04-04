@@ -29,9 +29,22 @@ namespace AspNetMvcCoreWebUI.TagHelpers
                 else
                 {
                     stringBuilder.AppendFormat("<a href='/products/{0}?page={1}'>{1}</a>", PageModel.CurrentCategoryName, i);
-                }
+                } 
                 stringBuilder.Append("</li>");
             }
+            //if (string.IsNullOrEmpty(PageModel.CurrentCategoryName))
+            //{
+            //    if (PageModel.TotalPages()>5)
+            //    {
+            //        stringBuilder.AppendFormat("<li><a href='/products?page={0}'><i class='fa fa-angle-right'></i></a></li>", PageModel.TotalPages()+1);
+            //    }
+               
+            //}
+            //if (PageModel.TotalPages() > 5)
+            //{
+            //    stringBuilder.AppendFormat("<li><a href='/products/{0}?page={1}'><i class='fa fa-angle-right'></i></a></li>", PageModel.CurrentCategoryName, PageModel.TotalPages() + 1);
+            //}
+            //stringBuilder.AppendFormat("<li><a href='#'><i class='fa fa-angle-right'></i></a></li>");
             output.Content.SetHtmlContent(stringBuilder.ToString());
 
             base.Process(context, output);
