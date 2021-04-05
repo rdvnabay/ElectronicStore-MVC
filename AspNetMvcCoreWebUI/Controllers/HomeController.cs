@@ -1,8 +1,11 @@
 ﻿using Business.Abstract;
+using Core.Entities.Concrete;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace AspNetMvcCoreWebUI.Controllers
@@ -25,8 +28,8 @@ namespace AspNetMvcCoreWebUI.Controllers
         #region Index
         public IActionResult Index()
         {
-            
-            return View(_productService.GetAll().Data);
+            var model = _productService.GetAll().Data;
+            return View(model);
         }
         #endregion
     }

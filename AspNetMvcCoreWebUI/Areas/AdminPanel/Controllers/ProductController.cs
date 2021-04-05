@@ -60,6 +60,7 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
         {
             var product = _mapper.Map<Product>(model);
             var productDetail = _mapper.Map<ProductDetail>(model);
+            var productCategory = _mapper.Map<ProductCategory>(model);
             if (model == null)
             {
                 return View(model);
@@ -72,6 +73,9 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
 
             productDetail.Id = product.Id;
             _productDetailService.Add(productDetail);
+
+            productCategory.ProductId = product.Id;
+            _productService.AddProductCategory(productCategory);
 
             foreach (var file in files)
             {
@@ -91,6 +95,7 @@ namespace AspNetMvcCoreWebUI.Areas.AdminPanel.Controllers
                 //model.Images.Add(image);
                 _imageService.Add(image);
             }
+            TempData["success"] = model.Name + " adlı ürün eklendi";
             return RedirectToAction("Index", "Product");
         }
         #endregion

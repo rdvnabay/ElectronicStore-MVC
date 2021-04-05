@@ -20,12 +20,16 @@ namespace Business.Concrete
     {
         #region Dependency Injection
         IProductDal _productDal;
+        IProductCategoryDal _productCategoryDal;
         ICategoryService _categoryService;
-        public ProductManager(IProductDal productDal,
+        public ProductManager(
+            IProductDal productDal,
+            IProductCategoryDal productCategoryDal,
             ICategoryService categoryService)
         {
             _productDal = productDal;
             _categoryService = categoryService;
+            _productCategoryDal = productCategoryDal;
         }
         #endregion
 
@@ -154,6 +158,12 @@ namespace Business.Concrete
         public IDataResult<List<Product>> GetProductsAll(int page, int pageSize)
         {
             return new SuccessDataResult<List<Product>>(_productDal.GetProductsAll(page, pageSize));
+        }
+
+        public IResult AddProductCategory(ProductCategory productCategory)
+        {
+            _productCategoryDal.Add(productCategory);
+            return new SuccessResult();
         }
         #endregion
     }

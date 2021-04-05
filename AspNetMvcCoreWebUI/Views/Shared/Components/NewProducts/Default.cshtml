@@ -1,76 +1,164 @@
 ﻿@model List<ProductListDto>
-    <div class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
 
-                <!-- section title -->
-                <div class="col-md-12">
-                    <div class="section-title">
-                        <h3 class="title">Yeni Ürünler</h3>
-                        <div class="section-nav">
-                            <ul class="section-tab-nav tab-nav">
-                                <li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>
-                                <li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
-                                <li><a data-toggle="tab" href="#tab1">Cameras</a></li>
-                                <li><a data-toggle="tab" href="#tab1">Accessories</a></li>
-                            </ul>
-                        </div>
+            <!-- section title -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h3 class="title">Yeni Ürünler</h3>
+                    <div class="section-nav">
+                        <ul class="section-tab-nav tab-nav">
+                            <li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>
+                            <li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
+                            <li><a data-toggle="tab" href="#tab1">Cameras</a></li>
+                            <li><a data-toggle="tab" href="#tab1">Accessories</a></li>
+                        </ul>
                     </div>
                 </div>
-                <!-- /section title -->
-                <!-- Products tab & slick -->
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="products-tabs">
-                            <!-- tab -->
-                            <div id="tab1" class="tab-pane active">
-                                <div class="products-slick" data-nav="#slick-nav-1">
-                                    <!-- product -->
-                                    @foreach (var product in Model)
-                                    {
-                                        <div class="product">
-                                            <div class="product-img">
-                                                <img src="~/site/img/product03.png" alt="">
-                                                <div class="product-label">
-                                                    <span class="sale">-30%</span>
-                                                    <span class="new">NEW</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-body">
-                                                <p class="product-category">Category</p>
-                                                <h3 class="product-name"><a href="#">@product.Name</a></h3>
-                                                <h4 class="product-price">@product.Price <del class="product-old-price">$990.00</del></h4>
-                                                <div class="product-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                                <div class="product-btns">
-                                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                                    <a type="button" asp-controller="Product" asp-action="Detail" asp-route-productId="@product.Id" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp"></span></a>
-                                                </div>
-                                            </div>
-                                            <div class="add-to-cart">
-                                                <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.Id" class="add-to-cart-btn btn btn-danger"><i class="fa fa-shopping-cart"></i> Sepete Ekle</a>
+            </div>
+            <!-- /section title -->
+            <!-- Products tab & slick -->
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="products-tabs">
+                        <!-- tab -->
+                        <div id="tab1" class="tab-pane active">
+                            <div class="products-slick" data-nav="#slick-nav-1">
+                                <!-- product -->
+                                @foreach (var product in Model)
+                                {
+                                    <div class="product">
+                                        <div class="product-img">
+                                            <img src="~/site/img/product03.png" alt="">
+                                            <div class="product-label">
+                                                <span class="sale">-30%</span>
+                                                <span class="new">NEW</span>
                                             </div>
                                         </div>
-                                    }
-                                    <!-- /product -->
-                                </div>
-                                <div id="slick-nav-1" class="products-slick-nav"></div>
+                                        <div class="product-body">
+                                            <p class="product-category">Category</p>
+                                            <h3 class="product-name"><a href="#">@product.Name</a></h3>
+                                            <h4 class="product-price">@product.Price <del class="product-old-price">$990.00</del></h4>
+                                            <div class="product-rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div class="product-btns">
+                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+                                                <a type="button" asp-controller="Product" asp-action="Detail" asp-route-productId="@product.Id" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp"></span></a>
+                                            </div>
+                                        </div>
+                                        <div class="add-to-cart">
+                                            <a @*asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.Id"*@ data-productId="@product.Id" class="add-to-cart-btn btn btn-danger AddLink"><i class="fa fa-shopping-cart"></i> Sepete Ekle</a>
+                                        </div>
+                                    </div>
+                                }
+                                <!-- /product -->
                             </div>
-                            <!-- /tab -->
+                            <div id="slick-nav-1" class="products-slick-nav"></div>
                         </div>
+                        <!-- /tab -->
                     </div>
                 </div>
-                <!-- Products tab & slick -->
             </div>
-            <!-- /row -->
+            <!-- Products tab & slick -->
         </div>
-        <!-- /container -->
+        <!-- /row -->
     </div>
+    <!-- /container -->
+</div>
+
+
+
+<script src="~/site/js/jquery.min.js"></script>
+@*<script type="text/javascript">
+    $(function () {
+        // Document.ready -> link up remove event handler
+        $(".AddLink").click(function () {
+            // Get the id from the link
+            var productId = $(this).attr("data-productId");
+            if (productId != '') {
+                // Perform the ajax post
+                $.get("/Cart/AddToCart", { "productId": productId },
+                    function (data) {
+                        //// Successful requests get here
+                        //// Update the page elements
+                        //if (data.ItemCount == 0) {
+                        //    $('#row-' + data.DeleteId).fadeOut('slow');
+                        //} else {
+                        //    $('#item-count-' + data.DeleteId).text(data.ItemCount);
+                        //}
+                        $('#cart-total').text(data.CartTotal);
+                        //$('#update-message').text(data.Message);
+                        //$('#cart-status').text('Cart (' + data.CartCount + ')');
+                    });
+            }
+        });
+    });
+</script>*@
+
+<script>
+    $(document).ready(function () {
+        $('.AddLink').on('click', function () {
+            var productId = $(this).attr("data-productId");
+            $.ajax({
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                url: '/Cart/AddToCart',
+                data: { "productId": productId },
+                success: function (data) {
+                    $('#spnCart').html(data)
+                },
+                error: function (data) {
+                    alert(data);
+                }
+            });
+        });
+
+        //$('#spnCart').on('click', function () {
+        //    var getName = $('.divName').html();
+        //    $.ajax({
+        //        type: 'POST',
+        //        contentType: 'application/json; charset=utf-8',
+        //        url: '/Home/Index',
+
+        //        success: function (data) {
+        //            $('#spnCart').html(data);
+        //            $('#spnCart').modal({
+        //                backdrop: false
+        //            });
+        //        },
+        //        error: function (data) {
+        //            alert(data);
+        //        }
+        //    });
+        //});
+
+        $(document).delegate('.cartDel', 'click', function () {
+            var DeleteItem = parseInt($(this).closest('tr').prop('id'));
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: '/Home/DeleteCart',
+                data: "{ 'itemId':' " + DeleteItem + "' }",
+                success: function (data) {
+                    $('#exampleModal').html(data);
+                    $('#spnCart').html($(data).find('#cartList tbody tr').length);
+                    $('#exampleModal').modal({
+                        backdrop: false
+                    });
+                },
+                error: function (data) {
+                    alert(data);
+                }
+            });
+        });
+    });
+</script>

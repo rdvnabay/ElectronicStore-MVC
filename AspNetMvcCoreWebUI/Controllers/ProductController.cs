@@ -21,9 +21,9 @@ namespace AspNetMvcCoreWebUI.Controllers
 
         //Methods
         #region Index
-        public IActionResult Index(string categoryName, int page=1,int pageSize=2)
+        public IActionResult Index(string categoryName, int page=1)
         {
-            //const int pageSize = 4;
+            const int pageSize = 4;
             if (string.IsNullOrEmpty(categoryName))
             {
                 return View(new ProductListViewModel()

@@ -35,6 +35,8 @@ namespace Business.DependencyResolvers
             builder.RegisterType<EfProductDal>().As<IProductDal>().SingleInstance();
             builder.RegisterType<ProductManager>().As<IProductService>().SingleInstance();
 
+            builder.RegisterType<EfProductCategoryDal>().As<IProductCategoryDal>().SingleInstance();
+
             builder.RegisterType<EfProductDetailDal>().As<IProductDetailDal>().SingleInstance();
             builder.RegisterType<ProductDetailManager>().As<IProductDetailService>().SingleInstance();
 

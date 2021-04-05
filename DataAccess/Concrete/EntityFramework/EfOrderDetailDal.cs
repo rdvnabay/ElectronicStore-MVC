@@ -12,7 +12,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfOrderDetailDal : EfEntityRepositoryBase<OrderDetail, ElectronicShopDbContext>, IOrderDetailDal
     {
-        public List<UserOrderListDto> GetOrderList(int userId)
+        public List<UserOrderListDto> GetOrderList(int orderId)
         {
             using (var context = new ElectronicShopDbContext())
             {
@@ -21,8 +21,7 @@ namespace DataAccess.Concrete.EntityFramework
                              on o.Id equals od.OrderId
                              join p in context.Products
                              on od.ProductId equals p.Id
-                             where o.UserId == userId
-                             
+                             where o.Id == orderId
                              select new UserOrderListDto
                              {
                                  OrderId=o.Id,

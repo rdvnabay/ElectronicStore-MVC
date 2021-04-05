@@ -23,5 +23,6 @@ namespace Business.Abstract
         IDataResult<List<Product>> GetProductsAll(int page, int pageSize);
         IDataResult<List<Product>> GetProductsByCategory(string categoryName,int page,int pageSize);
         IDataResult<Product> GetProductDetails(int productId);
+        IResult AddProductCategory(ProductCategory productCategory);
     }
 }

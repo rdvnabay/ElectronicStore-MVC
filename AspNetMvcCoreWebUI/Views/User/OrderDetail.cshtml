@@ -1,4 +1,4 @@
-﻿@model List<Order>
+﻿@model List<UserOrderListDto>
 <div class="container">
     <div class="row">
         <div class="col-md-8">
@@ -7,20 +7,20 @@
                     <tr>
                         <th></th>
                         <th>Tarih</th>
-                        <th>Ödeme İşlemi</th>
-                        <th>Sipariş Durumu</th>
-                        <th></th>
+                        <th>Ürün Adı</th>
+                        <th>Adeti</th>
+                        <th>Fiyatı</th>
                     </tr>
                 </thead>
-                @foreach (var order in Model)
+                @foreach (var product in Model)
                 {
                     <tbody>
                         <tr>
                             <td></td>
-                            <td>@order.OrderDate</td>
-                            <td>@order.PaymentType</td>
-                            <td>@order.OrderStatus</td>
-                            <td><a asp-controller="User" asp-action="OrderDetail" asp-route-orderId="@order.Id">Sipariş Detay</a></td>
+                            <td>@product.OrderDate</td>
+                            <td>@product.Name</td>
+                            <td>@product.Quantity</td>
+                            <td>@product.Price</td>
                         </tr>
                     </tbody>
                 }

@@ -9,13 +9,14 @@
         <ul class="header-links pull-right">
             @if (Context.Session.GetString("userName") == null)
             {
+                <li><a asp-controller="User" asp-action="Index"><i class="fa fa-user-o"></i> Hesabım</a></li>
                 <li><a asp-controller="Account" asp-action="Login"><i class="fa fa-user-o"></i> Giriş Yap</a></li>
                 <li><a asp-controller="Account" asp-action="Register"><i class="fa fa-user-o"></i> Kayıt Ol</a></li>
                 <li><a asp-controller="User" asp-action="Orders" asp-route-userId="1"><i class="fa fa-user-o"></i> Siparişlerim</a></li>
             }
             else
             {
-                <li><a asp-controller="Account" asp-action="Login"><i class="fa fa-user-o"></i> Hesabım</a></li>
+                <li><a asp-controller="User" asp-action="Index"><i class="fa fa-user-o"></i> Hesabım</a></li>
                 <li><a asp-controller="Account" asp-action="Login"><i class="fa fa-user-o"></i> Çıkış Yap</a></li>
             }
         </ul>
@@ -65,7 +66,7 @@
                     </div>
                     <!-- /Wishlist -->
                     <!-- Cart -->
-                @await Component.InvokeAsync("CartSummary") 
+                @await Component.InvokeAsync("CartSummary",new { }) 
                     <!-- /Cart -->
                     <!-- Menu Toogle -->
                     <div class="menu-toggle">

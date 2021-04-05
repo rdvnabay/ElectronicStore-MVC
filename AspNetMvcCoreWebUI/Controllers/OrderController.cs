@@ -96,7 +96,9 @@ namespace AspNetMvcCoreWebUI.Controllers
 
                 _orderItemService.Add(orderdetail);
             }
-            return RedirectToAction("Success", "Order");
+            _cartService.RemoveFromCartAll(orderItems);
+            _cartSessionService.SetCart(orderItems);
+            return RedirectToAction("Success", "Order");  
         }
         #endregion
 

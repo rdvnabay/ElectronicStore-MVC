@@ -6,17 +6,14 @@ using System.Text;
 
 namespace Entities.Concrete
 {
-    public class Order:IEntity
+    public class UserComment:IEntity
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public DateTime OrderDate { get; set; }
-        public string Address { get; set; }
-        public string PaymentType { get; set; }
-        public string OrderStatus { get; set; }
-
+        public int CommentId { get; set; }
+        public DateTime Date { get; set; }
 
         public User User { get; set; }
-        public List<OrderDetail> OrderDetails { get; set; }
+        public Comment Comment { get; set; }
     }
 }

@@ -41,9 +41,11 @@ namespace Business.Concrete
         }
         #endregion
 
+        #region RemoveFromCartAll
         public void RemoveFromCartAll(Cart cart)
         {
-            cart.CartLines.Remove(cart.CartLines.FirstOrDefault());
+            cart.CartLines.Clear(); 
         }
+        #endregion
     }
 }

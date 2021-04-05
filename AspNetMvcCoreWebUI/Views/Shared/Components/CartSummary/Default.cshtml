@@ -6,7 +6,7 @@
         <div class="qty">@Model.CartLines.Count</div>
     </a>
     <div class="cart-dropdown">
-        <div class="cart-list">
+        <div class="cart-list" id="spnCart">
             @foreach (var item in Model.CartLines)
             {
                 <div class="product-widget">

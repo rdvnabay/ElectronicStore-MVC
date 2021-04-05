@@ -1,5 +1,14 @@
-﻿ @model List<Product>
-    <!-- Page Content -->
+﻿@model List<Product>
+
+@if (TempData["success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["success"]
+    </div>
+}
+
+
+<!-- Page Content -->
 <div class="content">
     <!-- Quick Overview -->
     <div class="row">
@@ -112,34 +121,34 @@
                     <tbody>
                         @foreach (var product in Model)
                         {
-                        <tr>
-                            @*<td class="text-center font-size-sm">
-            <a class="font-w600" href="be_pages_ecom_product_edit.html">
-                <img src="~/panel/img/@product.Images" width="50" height="50" />
-            </a>
-        </td>*@
-                            <td class="d-none d-md-table-cell font-size-sm">
-                                <a href="be_pages_ecom_product_edit.html">@product.Name</a>
-                            </td>
-                            <td class="d-none d-sm-table-cell text-center font-size-sm">17/05/2019</td>
-                            <td>
-                                <span class="badge badge-success">Available</span>
-                            </td>
-                            <td class="text-right d-none d-sm-table-cell font-size-sm">
-                                <strong>@product.UnitPrice</strong>
-                            </td>
-                            <td class="text-center font-size-sm">
-                                <a class="btn btn-sm btn-alt-secondary" asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" data-toggle="tooltip" title="View">
-                                    <i class="fa fa-fw fa-eye"></i>
-                                </a>
-                                <form method="post" asp-controller="Product" asp-action="Delete" style="display:inline">
-                                    <input type="hidden" name="productId" value="@product.Id" />
-                                    <button type="submit" class="btn btn-sm btn-alt-danger" data-toggle="tooltip" title="Delete">
-                                        <i class="fa fa-fw fa-times text-danger"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
+                            <tr>
+                                @*<td class="text-center font-size-sm">
+                                        <a class="font-w600" href="be_pages_ecom_product_edit.html">
+                                            <img src="~/panel/img/@product.Images" width="50" height="50" />
+                                        </a>
+                                    </td>*@
+                                <td class="d-none d-md-table-cell font-size-sm">
+                                    <a href="be_pages_ecom_product_edit.html">@product.Name</a>
+                                </td>
+                                <td class="d-none d-sm-table-cell text-center font-size-sm">17/05/2019</td>
+                                <td>
+                                    <span class="badge badge-success">Available</span>
+                                </td>
+                                <td class="text-right d-none d-sm-table-cell font-size-sm">
+                                    <strong>@product.UnitPrice</strong>
+                                </td>
+                                <td class="text-center font-size-sm">
+                                    <a class="btn btn-sm btn-alt-secondary" asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" data-toggle="tooltip" title="View">
+                                        <i class="fa fa-fw fa-eye"></i>
+                                    </a>
+                                    <form method="post" asp-controller="Product" asp-action="Delete" style="display:inline">
+                                        <input type="hidden" name="productId" value="@product.Id" />
+                                        <button type="submit" class="btn btn-sm btn-alt-danger" data-toggle="tooltip" title="Delete">
+                                            <i class="fa fa-fw fa-times text-danger"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>

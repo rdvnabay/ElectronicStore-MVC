@@ -33,7 +33,8 @@ namespace AspNetMvcCoreWebUI.Controllers
             var cart = _cartSessionService.GetCart();
             _cartService.AddToCart(cart, productToBeAdded.Data);
             _cartSessionService.SetCart(cart);
-            return RedirectToAction("Index", "Home");
+            return Json(cart);
+            //return RedirectToAction("Index", "Home");
         }
         #endregion
 

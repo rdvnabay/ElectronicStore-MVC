@@ -9,7 +9,6 @@ namespace Business.Abstract
     public interface IOrderService
     {
         IResult Add(Order order);
-
-
+        IDataResult<List<Order>> GetByUser(int userId);
     }
 }

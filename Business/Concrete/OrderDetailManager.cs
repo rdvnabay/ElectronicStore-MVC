@@ -23,9 +23,9 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        public IDataResult<List<UserOrderListDto>> GetOrderList(int userId)
+        public IDataResult<List<UserOrderListDto>> GetOrderList(int orderId)
         {
-            return new SuccessDataResult<List<UserOrderListDto>>(_orderItemDal.GetOrderList(userId));
+            return new SuccessDataResult<List<UserOrderListDto>>(_orderItemDal.GetOrderList(orderId));
         }
     }
 }

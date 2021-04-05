@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="list-group">
+                <li class="list-group-item"><a asp-controller="User" asp-action="Index">Hesap Ayarları</a></li>
+                <li class="list-group-item"><a asp-controller="User" asp-action="Cart">Sepetim</a></li>
+                <li class="list-group-item"><a asp-controller="User" asp-action="Orders">Satın Alma Geçmişi</a></li>
+                <li class="list-group-item"><a asp-controller="User" asp-action="OrderDetail">Bildirimler</a></li>
+                <li class="list-group-item"><a asp-controller="User" asp-action="Address">Adres Bilgileri</a></li>
+                <li class="list-group-item"><a asp-controller="User" asp-action="CardInfo">Kart Bilgileri</a></li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+
+        </div>
+    </div>
+</div>
+
